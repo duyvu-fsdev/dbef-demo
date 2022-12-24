@@ -1,0 +1,18 @@
+.wrapper {
+    height: var(--header-acction-height);
+    width: 100%;
+    display: flex;
+    margin: 0;
+    font-size: 1.6rem;
+    color: inherit;
+
+    * {
+        text-align: center;
+    }
+
+    &:hover,
+    &:focus {
+        color: var(--main-color);
+        background-color: #000000b8;
+    }
+}

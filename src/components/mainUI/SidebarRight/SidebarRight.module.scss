@@ -1,0 +1,50 @@
+.wrapper {
+    grid-area: nav-bar;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    position: relative;
+    z-index: 4;
+    color: #212121;
+
+    .container {
+        z-index: 4;
+        height: 100vh;
+        display: flex;
+        min-height: 0;
+        user-select: none;
+        width: 100%;
+        justify-content: right;
+    }
+}
+
+.content {
+    padding: 0;
+    margin-right: 12px;
+}
+
+.weather {
+    text-align: center;
+    flex-direction: column;
+    padding: 10px;
+    height: 120px;
+    border: 2px solid #cfcfcf;
+    background-color: #b3e5fb;
+    color: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.header {
+    width: 100%;
+}
+
+.body {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

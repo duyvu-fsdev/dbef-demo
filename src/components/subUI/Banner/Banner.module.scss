@@ -1,0 +1,82 @@
+.slider {
+    background-color: #212121;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    position: relative; /* If you want text inside of it */
+    overflow-x: hidden;
+    // animation: modalIn ease 1s;
+}
+
+.left-arrow {
+    position: absolute;
+    top: 25%;
+    transform: translate(0, -50%);
+    left: 32px;
+    font-size: 45px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 12;
+    padding: 20px 40px 20px 20px;
+}
+
+.right-arrow {
+    position: absolute;
+    top: 25%;
+    transform: translate(0, -50%);
+    right: 32px;
+    font-size: 45px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 12;
+    padding: 20px 20px 20px 40px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 19;
+    cursor: pointer;
+}
+
+.banner-btn {
+    padding: 0;
+    z-index: 20;
+    color: currentColor;
+}
+
+.banner-img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.border {
+    box-shadow: inset 0px 0px 50px 5px #212121;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes modalIn {
+    from {
+        // transform: translateX(-50%);
+        left: 0;
+        opacity: 1;
+    }
+    to {
+        left: -100%;
+        // transform: translateX(-50%);
+        opacity: 0.8;
+    }
+}
+
+.dots-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}

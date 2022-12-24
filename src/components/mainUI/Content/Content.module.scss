@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner {
+    padding: var(--padding);
+    max-width: 100%;
+    border-radius: 0px 0px 6px 6px;
+    margin-top: var(--header-height);
+    width: 1800px;
+}

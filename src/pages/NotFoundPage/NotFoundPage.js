@@ -1,0 +1,44 @@
+import classNames from 'classnames/bind';
+import styles from './NotFoundPage.module.scss';
+
+import SettingsIcon from '@mui/icons-material/Settings';
+import { Button } from '@mui/material';
+import TouchAppIcon from '@mui/icons-material/TouchApp';
+
+const cx = classNames.bind(styles);
+
+function NotFoundPage() {
+    return (
+        <>
+            <div className={cx('container')}>
+                <h1 className={cx('first-four')}>4</h1>
+                <SettingsIcon sx={{ fontSize: '40vmin' }} className={cx('cog1')} />
+                <SettingsIcon sx={{ fontSize: '40vmin' }} className={cx('cog2')} />
+                <h1 className={cx('second-four')}>4</h1>
+                <p className={cx('wrong-para')}>Uh Oh! Page not found!</p>
+                <Button
+                    variant="outlined"
+                    className={cx('button')}
+                    sx={{
+                        position: 'absolute',
+                        bottom: '1vmin',
+                        padding: '6px 24px',
+                        color: 'inherit',
+                        borderColor: 'currentcolor',
+                        ':hover': {
+                            color: 'var(--main-color)',
+                            borderColor: 'currentcolor',
+                            backgroundColor: '#000000b8',
+                        },
+                    }}
+                    href={'/'}
+                >
+                    Go to home <TouchAppIcon />
+                </Button>
+            </div>
+            <div className={cx('bottom')}></div>
+        </>
+    );
+}
+
+export default NotFoundPage;

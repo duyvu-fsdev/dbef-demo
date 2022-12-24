@@ -1,0 +1,45 @@
+.popper {
+    min-width: 250px;
+}
+
+.content {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+
+    h2 {
+        margin: 0;
+        width: 100%;
+        font-size: 1.8rem;
+        box-sizing: border-box;
+        margin-block: 0px;
+    }
+}
+
+.text {
+    margin-block: 0px;
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.action {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 12px;
+
+    .log-in {
+        padding: 0 18px;
+        border-radius: 24px;
+    }
+}

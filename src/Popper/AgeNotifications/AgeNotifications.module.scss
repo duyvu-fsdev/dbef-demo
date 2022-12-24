@@ -1,0 +1,79 @@
+.popper {
+    border-radius: 8px;
+    box-shadow: 0 4px 40px rgb(0 0 0 / 30%);
+    // color: #fff;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    outline: 0;
+    position: relative;
+    text-align: start;
+
+    &::before {
+        display: block;
+        box-sizing: border-box;
+        content: '';
+        z-index: -1;
+        height: 12px;
+        width: 12px;
+        position: absolute;
+        bottom: 10%;
+        left: -6px;
+        transform: translate(10%, -20%) rotate(45deg);
+        background-color: #0d72ea;
+        border-radius: 4px 0px 0px;
+    }
+}
+
+.popper-container {
+    padding: 12px;
+    position: relative;
+    background-color: #0d72ea;
+}
+
+.content {
+    max-width: 336px;
+    min-width: 300px;
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    color: yellow;
+
+    h2 {
+        margin: 0;
+        width: 100%;
+        font-size: 1.8rem;
+        box-sizing: border-box;
+        margin-block: 0px;
+        // font-weight: 700;
+    }
+}
+
+.text {
+    margin-block: 0px;
+    margin: 0;
+}
+
+.action {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin-top: 12px;
+    .not-now,
+    .to-profile,
+    .log-in {
+        padding: 0 18px;
+        border-radius: 24px;
+    }
+    // .not-now {
+    //    // color: #fff;
+    //     padding: 8px 32px;
+    // }
+}

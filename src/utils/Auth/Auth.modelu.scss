@@ -1,0 +1,150 @@
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    // text-align: center;
+    align-items: center;
+}
+
+.auth-form-wrapper {
+    border-radius: 6px;
+    width: 100%;
+    padding: 7px 15px;
+    background-color: #616161;
+
+    .divide,
+    .full {
+        display: flex;
+        // div :nth(1) {
+        margin-top: 5px;
+        justify-content: center;
+        // }
+        gap: 5px;
+        * {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .full {
+        border-top: 1px solid #fff;
+        * {
+            text-align: center;
+        }
+    }
+
+    .mui-btn {
+        align-items: flex-end;
+    }
+
+    .auth-h1 {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .auth-input {
+        min-width: 100px;
+        border-radius: 6px;
+        width: 100%;
+        color: #fff;
+        margin: 10px 0;
+        // text-align: center;
+    }
+
+    #name {
+        text-transform: capitalize;
+    }
+
+    .auth-btn {
+        padding: 0 8px;
+        display: flex;
+        width: 100%;
+        margin-top: 5px;
+        text-align: center;
+        align-items: center;
+    }
+    .fb-auth {
+        background-color: #1b74e4;
+        * {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+    }
+}
+
+.user-popper-btn {
+    padding: 0 12px;
+    // text-align: justify;
+    font-weight: 400;
+    width: 100%;
+    display: flex;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+        span {
+            color: var(--main-color);
+        }
+    }
+}
+
+.text-underline {
+    text-decoration: underline !important;
+}
+
+.border-top {
+    border-top: 1px solid #fff;
+}
+.del-cmt-wrapper {
+    .delete-btn {
+        padding: 0;
+        margin-right: 12px;
+        color: inherit;
+        text-transform: capitalize;
+        font-size: 1.2rem;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+.dialog {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    box-shadow: 0 0 10px 5px #00000012;
+    z-index: 19;
+    animation: modalIn ease 0.2s;
+    background-color: #a75b5b;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+@keyframes modalIn {
+    from {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0.8;
+    }
+    to {
+        top: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+.disagree-btn,
+.agree-btn {
+    padding: 0 10px;
+    font-weight: 500;
+    margin-right: 10px;
+    color: inherit;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    &:hover {
+        color: var(--main-color);
+        background-color: #000000b8;
+    }
+}

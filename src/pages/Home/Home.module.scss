@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 300px;
+    min-width: 100%;
+    position: relative;
+    // color: #fff;
+}
+
+.banner {
+    // background-color: #212121;
+    // width: 100%;
+    // padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    // position: relative; /* If you want text inside of it */
+    margin-top: calc(var(--header-height) * -1);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inner {
+    // max-width: 1800px;
+    width: 100%;
+}
+
+.children-content {
+    display: flex;
+    flex-direction: column;
+    margin: 32px 0;
+    min-height: 300px;
+    min-width: 100%;
+    position: relative;
+}
+
+.title {
+    display: flex;
+    font-size: 2.4rem;
+    font-weight: 700;
+    font-family: var(--sub-font-family);
+    margin: 10px 0;
+    // color: var(--main-color);
+
+    div {
+        flex: 1;
+    }
+
+    .see-more {
+        display: flex;
+        font-family: var(--sub-font-family);
+        font-size: 1.6rem;
+        font-weight: 400;
+        // color: #fff;
+
+        &:hover {
+            text-decoration: none;
+            color: var(--main-color);
+        }
+    }
+}

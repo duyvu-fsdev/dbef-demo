@@ -1,0 +1,203 @@
+.wrapper {
+    display: flex;
+    min-height: 100%;
+    justify-content: center;
+    // color: #fff;
+}
+
+.path {
+    display: flex;
+    padding-top: 12px;
+    padding-left: 12px;
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: var(--sub-font-family);
+    margin: 15px 0;
+    div {
+        flex: 1;
+    }
+    .see-more {
+        font-size: 1.6rem;
+        font-weight: 400;
+        &:hover {
+            text-decoration: underline;
+            color: blue;
+        }
+    }
+}
+
+.container {
+    // max-width: 1800px;
+    width: 100%;
+    position: relative;
+}
+
+.info-wrapper {
+    // min-width: 760px;
+
+    table {
+        margin: 0 auto;
+    }
+
+    th {
+        vertical-align: top;
+        border: 1px solid #fff;
+    }
+}
+
+.image-container {
+    position: relative;
+    .image {
+        width: 320px;
+        height: 450px;
+        position: relative;
+
+        .img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .action {
+            pointer-events: var(--pointer-events);
+            opacity: var(--opacity);
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .play-btn,
+        .add-btn,
+        .share-btn {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            display: flex;
+            justify-content: center;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            flex: 1;
+            font-family: var(--sub-font-family);
+            text-transform: capitalize;
+            background-color: #000;
+            border: 2px solid #fff;
+
+            &:hover {
+                border: 2px solid var(--main-color);
+                color: var(--main-color);
+            }
+        }
+    }
+}
+
+.info {
+    padding: 0 20px;
+    z-index: 10;
+    text-align: left;
+    position: relative;
+
+    .c-info {
+        height: 450px;
+        position: relative;
+    }
+
+    .content {
+        min-width: 320px;
+
+        * {
+            line-height: 1.8;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+        .name {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: var(--sub-font-family);
+            padding-top: 10px;
+        }
+
+        .origin-name {
+            color: rgb(185, 154, 154);
+            font-size: 1.6rem;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #fff;
+        }
+    }
+}
+
+.desc {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    // background-color: #333;
+
+    h3 {
+        display: block;
+        padding: 10px;
+        background-color: #7dd3fc;
+        color: #000;
+        font-size: 2rem;
+        font-weight: 700;
+        &:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+    }
+    .desc-content {
+        margin: 15px;
+        text-align: justify;
+        font-size: 1.6rem;
+    }
+    .poster {
+        width: 100%;
+        padding-bottom: 50%;
+        position: relative; /* If you want text inside of it */
+        overflow-x: hidden;
+        .poster-img {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.share-wraper {
+    flex-wrap: wrap;
+    display: flex;
+    // padding: 5px;
+    width: 300px;
+    /* gap: 0px 0px; */
+    justify-content: space-between;
+}
+
+.share-block {
+    padding: 0;
+    width: 33%;
+
+    .share-item {
+        width: 100%;
+        // height: 100%;
+        padding: 10px 5px;
+
+        &:hover {
+            background-color: #000000b8;
+        }
+        svg {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            fill: #fff;
+        }
+        p {
+            font-size: 1.4rem;
+            color: #fff;
+        }
+    }
+}

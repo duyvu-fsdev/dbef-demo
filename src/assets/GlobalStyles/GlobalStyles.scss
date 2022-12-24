@@ -1,0 +1,88 @@
+@import 'normalize.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --main-font-family: 'Poppins', sans-serif;
+    --sub-font-family: 'Playfair Display', serif;
+    --main-color: #f2bf83;
+    // --main-color: #000;
+
+    --background-color: #212121;
+
+    --header-height: 64px;
+    --header-acction-height: 36px;
+    --icon-header-height: 24px;
+    --nav-bar-width: 220px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+// scrollbar
+
+html *::-webkit-scrollbar {
+    width: 6px;
+    // background-color: #fff;
+}
+
+html *::-webkit-scrollbar-thumb {
+    height: 56px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    // border: none;
+    background-clip: content-box;
+    background-color: #fff;
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: transparent;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: var(--main-font-family);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    min-width: 320px;
+    overflow-y: overlay;
+    background-color: var(--background-color);
+    // color: var(--main-color);
+    color: #000;
+    user-select: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+button,
+input,
+[tabindex] {
+    background-color: transparent;
+    outline: 1px solid transparent;
+    border: 1px solid transparent;
+}
+
+a[href] {
+    text-decoration: none;
+}
+
+///// Banner
+
+.dot {
+    margin: 0 3px;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 13;
+    &:hover {
+        color: green;
+    }
+}

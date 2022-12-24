@@ -1,0 +1,50 @@
+.wrapper {
+    position: relative;
+    z-index: 999;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.8;
+    transition: bottom 0.3s linear 0s;
+    background-color: #212121;
+}
+
+.inner {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 100px;
+    width: 350px;
+    color: #fff;
+    box-shadow: 0 0 10px 5px #00000012;
+    z-index: 19;
+    animation: modalIn ease 1s;
+}
+
+@keyframes modalIn {
+    from {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0.8;
+    }
+    to {
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    right: 0;
+}

@@ -1,0 +1,12 @@
+export { default as ListUpdate } from '_/pages/SubPages/ListUpdate';
+export { default as Home } from '_/pages/Home/Home';
+export { default as Login } from '_/utils/Auth/Login';
+export { default as Register } from '_/utils/Auth/Register';
+export { default as Logout } from '_/utils/Auth/Logout';
+export { default as ForgotPassword } from '_/utils/Auth/ForgotPassword';
+export { default as MovieDetails } from '_/pages/MovieDetails/MovieDetails';
+export { default as Play } from '_/pages/Play/Play';
+export { default as Search } from '_/pages/Search/Search';
+export { default as NotFoundPage } from '_/pages/NotFoundPage/NotFoundPage';
+export { default as Profile } from '_/pages/Profile/Profile';
+export { default as WatchLater } from '_/pages/SubPages/WatchLater';

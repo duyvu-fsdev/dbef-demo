@@ -1,0 +1,22 @@
+.wrapper {
+    .calendar {
+        background-color: #b3e5fb;
+        section:nth-child(2) {
+            pointer-events: none;
+        }
+    }
+    button {
+        border: none;
+    }
+}
+.clock {
+    margin: 10px 0;
+    border: 2px solid #cfcfcf;
+    height: 32px;
+    background-color: #b3e5fb;
+    color: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}

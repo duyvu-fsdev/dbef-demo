@@ -1,0 +1,115 @@
+.wrapper {
+    display: grid;
+    grid-template-areas:
+        'header header header'
+        'sidebar-left main-view sidebar-right'
+        'sidebar-left now-playing-bar sidebar-right';
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    width: 100%;
+    // color: #fff;
+}
+
+.sidebar-sh {
+    grid-area: sidebar-left;
+    position: relative;
+    width: 0;
+
+    .hide-sidebar,
+    .show-sidebar {
+        padding: 0;
+        width: 0;
+        height: 0;
+        // bottom: 50%;
+        background-color: transparent;
+        color: var(--main-color);
+        cursor: pointer;
+        position: sticky;
+        z-index: 21;
+        font-size: 2rem;
+        top: 40%;
+
+        &:hover {
+            // color: #fff;
+        }
+    }
+}
+
+.header {
+    grid-area: header;
+    height: 64px;
+    min-width: 0;
+    // pointer-events: a;
+    z-index: 99;
+    position: relative;
+    position: fixed;
+}
+
+.sidebar-left {
+    display: flex;
+    flex-direction: column;
+    grid-area: sidebar-left;
+    min-height: 0;
+    position: relative;
+    width: calc(var(--nav-bar-width) + 9px);
+    z-index: 20;
+    border-right: 1px solid #fff;
+    padding-top: 24px;
+    position: sticky;
+    top: var(--header-height);
+    height: calc(100vh - (var(--header-height)));
+}
+
+.sidebar-right {
+    display: flex;
+    flex-direction: column;
+    grid-area: sidebar-right;
+    min-height: 0;
+    position: relative;
+    width: calc(var(--sidebar-left-width) + 9px);
+    // z-index: 20;
+    border-left: 1px solid #fff;
+    padding-top: 24px;
+
+    position: sticky;
+    top: var(--header-height);
+    height: calc(100vh - (var(--header-height)));
+}
+
+.main-content {
+    // width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    grid-area: main-view;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.footer {
+    // width: 100%;
+    text-align: center;
+    // // position: fixed;
+    // // bottom: 0px;
+
+    grid-area: now-playing-bar;
+    width: 100%;
+    z-index: 20;
+    border-top: 1px solid #fff;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000, $alpha: 0.2);
+    z-index: 20;
+    cursor: pointer;
+}

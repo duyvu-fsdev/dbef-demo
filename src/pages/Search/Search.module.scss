@@ -1,0 +1,35 @@
+.wrapper {
+    display: flex;
+    // min-height: 100%;
+    justify-content: center;
+    margin-top: 72px;
+    // color: #fff;
+    width: 300px;
+    flex-wrap: wrap;
+}
+
+.inner {
+    // max-width: 1800px;
+}
+
+.children-content {
+    min-height: 300px;
+    min-width: 100%;
+    position: relative;
+}
+
+.title {
+    display: flex;
+    font-size: 2.4rem;
+    font-weight: 700;
+    font-family: var(--sub-font-family);
+    margin: 10px 0;
+    color: var(--main-color);
+}
+
+.header {
+    width: 100%;
+}
+.body {
+    width: 100%;
+}

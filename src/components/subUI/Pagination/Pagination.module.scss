@@ -1,0 +1,51 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // color: #fff;
+
+    margin: 15px auto;
+}
+
+.prev-button,
+.next-button,
+.go-button {
+    display: flex;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px 15px;
+    min-width: 40px;
+    background-color: var(--background-color);
+    margin: 5px;
+    font-weight: 400;
+    &:hover {
+        // box-shadow: 0 8px 24px rgb(0 0 0 / 50%);
+        background-color: #333;
+        color: var(--main-color);
+        cursor: pointer;
+        border-color: var(--main-color);
+    }
+}
+
+.prev-button {
+    pointer-events: var(--pointer-events);
+    opacity: var(--opacity);
+}
+.next-button {
+    pointer-events: var(--pointer-events);
+    opacity: var(--opacity);
+}
+
+.page-input {
+    border: 1px solid currentColor;
+    padding: 8px 0;
+    font-size: 1.6rem;
+    width: 60px;
+    color: inherit;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.current-page {
+    margin: 0 10px;
+}
