@@ -1,4 +1,15 @@
-# Cài đặt customize-cra : `npm i customize-cra react-app-rewired -D`
+# Hello
+
+## Push github
+
+---
+
+`git init`
+`git add .`
+`git commit -m 'message'`
+`git push -u origin master`
+
+## Cài đặt customize-cra : `npm i customize-cra react-app-rewired -D`
 
 ---
 
