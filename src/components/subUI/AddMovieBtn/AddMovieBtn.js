@@ -38,7 +38,7 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
         if (docSnap.exists()) {
             const data = docSnap.data();
 
-            if (data.uid.includes(uid)) {
+            if (data.uid?.includes(uid)) {
                 handleShowSnackbar({
                     type: 'warning',
                     open: true,

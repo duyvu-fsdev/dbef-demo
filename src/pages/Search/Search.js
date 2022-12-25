@@ -1,8 +1,9 @@
 import { Box, Typography } from '@mui/material';
+import { MyTextField } from '_/components/CustomComponents/CustomComponents';
 
 function Search() {
     return (
-        <div>
+        <Box>
             <Typography variant="h3">Search</Typography>
             <Box
                 sx={{
@@ -12,7 +13,8 @@ function Search() {
                     margin: '0 auto',
                 }}
             />
-        </div>
+            <MyTextField type="text" label="test" />
+        </Box>
     );
 }
 export default Search;

@@ -10,7 +10,7 @@ function SearchMovieItem(props) {
     const { data, pathImage, handleClick } = props;
     return (
         <div className={cx('search-item')}>
-            <Button href={`/phim&name=${data.slug}`} className={cx('overlay')} onClick={handleClick}></Button>
+            <Button to={`/phim&name=${data.slug}`} className={cx('overlay')} onClick={handleClick}></Button>
             <div className={cx('movie-img-block')}>
                 <img className={cx('movie-img')} src={`${pathImage}${data.thumb_url}`} alt={data.name} />
             </div>

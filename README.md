@@ -2,8 +2,8 @@
 
 ## Push github
 
----
-
+`git remote add origin https://github.com/user/repo.git`
+`git branch -M main`
 `git init`
 `git add .`
 `git commit -m 'message'`
@@ -130,10 +130,6 @@ useBabelRc()
 ---
 
 ## Cài thư viện classnames: `npm i classnames`
-
----
-
-## Cài thư viện tippy: `npm i @tippyjs/react`
 
 ---
 

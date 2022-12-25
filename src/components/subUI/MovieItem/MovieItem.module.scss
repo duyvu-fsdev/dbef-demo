@@ -39,9 +39,9 @@
     width: 100%;
 }
 
-.info {
-    // min-height: 50px;
-}
+// .info {
+//     // min-height: 50px;
+// }
 
 .title {
     padding: 10px 5px;
@@ -96,4 +96,11 @@
             align-items: center;
         }
     }
+}
+
+.tooltip-content {
+    padding: 10px;
+}
+.tooltip-text {
+    margin: 10px 0;
 }

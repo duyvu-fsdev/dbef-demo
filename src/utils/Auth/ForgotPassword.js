@@ -1,11 +1,11 @@
-import { TextField } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { MyTextField } from '_/components/CustomComponents/CustomComponents';
 import { Button } from '_/components/subUI';
-import { changeFormSlice, showNotifSlice } from '_/Hook/redux/slices';
 import { useAuth } from '_/contexts/AuthContext';
+import { changeFormSlice, showNotifSlice } from '_/Hook/redux/slices';
 import styles from './Auth.modelu.scss';
 
 const cx = classNames.bind(styles);
@@ -38,7 +38,7 @@ function ForgotPassword() {
                     state: { open: false, message: '', type: '' },
                 }),
             );
-        }, 5000);
+        }, 2000);
     };
 
     const handleSubmit = async (e) => {
@@ -83,23 +83,12 @@ function ForgotPassword() {
         );
     };
 
-    const style = {
-        '& label.Mui-focused': {
-            color: '#fff',
-        },
-        '& .MuiOutlinedInput-root': {
-            '&.Mui-focused fieldset': {
-                borderColor: '#fff',
-            },
-        },
-    };
     return (
         <div className={cx('fogot-wrapper')}>
             <div className={cx('auth-form-wrapper')}>
                 <h1 className={cx('auth-h1')}>Forgot password</h1>
                 <form onSubmit={handleSubmit}>
-                    <TextField
-                        sx={style}
+                    <MyTextField
                         className={cx('auth-input')}
                         size="small"
                         label="Enter Email"

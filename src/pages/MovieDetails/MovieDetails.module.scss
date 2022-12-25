@@ -2,7 +2,6 @@
     display: flex;
     min-height: 100%;
     justify-content: center;
-    // color: #fff;
 }
 
 .path {
@@ -29,31 +28,13 @@
 }
 
 .container {
-    // max-width: 1800px;
     width: 100%;
     position: relative;
-}
-
-.info-wrapper {
-    // min-width: 760px;
-
-    table {
-        margin: 0 auto;
-    }
-
-    th {
-        vertical-align: top;
-        border: 1px solid #fff;
-    }
 }
 
 .image-container {
     position: relative;
     .image {
-        width: 320px;
-        height: 450px;
-        position: relative;
-
         .img {
             width: 100%;
             height: 100%;
@@ -62,40 +43,46 @@
         .action {
             pointer-events: var(--pointer-events);
             opacity: var(--opacity);
-            position: absolute;
-            bottom: 10px;
             width: 100%;
             display: flex;
             cursor: pointer;
             color: #fff;
         }
+    }
+}
 
-        .play-btn,
-        .add-btn,
-        .share-btn {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
+.action-warrper {
+    .action-btn {
+        font-size: 1.6rem;
+        display: flex;
+        justify-content: center;
+        color: #fff;
+        width: 100%;
+        height: 45px;
+        text-transform: capitalize;
+        background-color: #000;
+        border: 2px solid #fff;
+        border-radius: 6px;
+
+        * {
             display: flex;
             justify-content: center;
-            color: #fff;
-            display: flex;
             align-items: center;
-            flex: 1;
-            font-family: var(--sub-font-family);
-            text-transform: capitalize;
-            background-color: #000;
-            border: 2px solid #fff;
-
-            &:hover {
-                border: 2px solid var(--main-color);
-                color: var(--main-color);
-            }
+            font-size: 2.5rem;
         }
+        &:hover {
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+        }
+    }
+    .share-btn {
+        height: 100%;
+        width: 100%;
     }
 }
 
 .info {
-    padding: 0 20px;
+    padding: 0 10px;
     z-index: 10;
     text-align: left;
     position: relative;
@@ -104,30 +91,29 @@
         height: 450px;
         position: relative;
     }
+}
+.content {
+    min-width: 320px;
 
-    .content {
-        min-width: 320px;
+    * {
+        line-height: 1.8;
+        font-size: 1.6rem;
+        font-weight: 400;
+    }
+    .name {
+        font-size: 2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-family: var(--sub-font-family);
+        padding-top: 10px;
+    }
 
-        * {
-            line-height: 1.8;
-            font-size: 1.6rem;
-            font-weight: 400;
-        }
-        .name {
-            font-size: 2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: var(--sub-font-family);
-            padding-top: 10px;
-        }
-
-        .origin-name {
-            color: rgb(185, 154, 154);
-            font-size: 1.6rem;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #fff;
-        }
+    .origin-name {
+        color: rgb(185, 154, 154);
+        font-size: 1.6rem;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #fff;
     }
 }
 
@@ -168,7 +154,7 @@
     }
 }
 
-.share-wraper {
+.share-wrapper {
     flex-wrap: wrap;
     display: flex;
     // padding: 5px;
@@ -182,6 +168,7 @@
     width: 33%;
 
     .share-item {
+        border-radius: 6px;
         width: 100%;
         // height: 100%;
         padding: 10px 5px;
@@ -198,6 +185,30 @@
         p {
             font-size: 1.4rem;
             color: #fff;
+        }
+    }
+}
+
+.tooltip-content {
+    padding: 10px;
+}
+.tooltip-title {
+    color: yellow;
+}
+.tooltip-text {
+    margin: 10px 0;
+}
+.tooltip-action {
+    .log-in,
+    .to-profile {
+        width: 100%;
+        text-align: center;
+        color: inherit;
+        border: 1px solid currentColor;
+        background-color: unset;
+        &:hover {
+            color: var(--main-color);
+            background-color: #000000b8;
         }
     }
 }

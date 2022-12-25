@@ -1,13 +1,13 @@
+import FacebookIcon from '@mui/icons-material/Facebook';
 import classNames from 'classnames/bind';
 import { updateProfile } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import FacebookIcon from '@mui/icons-material/Facebook';
-import { TextField } from '@mui/material';
+import { MyTextField } from '_/components/CustomComponents/CustomComponents';
 import { Button } from '_/components/subUI';
-import { changeFormSlice, showModalSlice, showNotifSlice } from '_/Hook/redux/slices';
 import { useAuth } from '_/contexts/AuthContext';
+import { changeFormSlice, showModalSlice, showNotifSlice } from '_/Hook/redux/slices';
 import styles from './Auth.modelu.scss';
 import addDocument from './firebase/addDocument';
 
@@ -45,12 +45,11 @@ function Register() {
                     state: { open: false, message: '', type: '' },
                 }),
             );
-        }, 5000);
+        }, 2000);
     };
 
     const handleSubmit = async (e) => {
         const fullName = `${firstName.split(' ')} ${lastName.split(' ')[0]}`.replace(/ + /g, ' ');
-        console.log({ fullName });
         e.preventDefault();
         if (password === confirmPassword) {
             register(email, confirmPassword, fullName)
@@ -119,24 +118,13 @@ function Register() {
         );
     };
 
-    const style = {
-        '& label.Mui-focused': {
-            color: '#fff',
-        },
-        '& .MuiOutlinedInput-root': {
-            '&.Mui-focused fieldset': {
-                borderColor: '#fff',
-            },
-        },
-    };
     return (
         <div className={cx('auth-wrapper')}>
             <div className={cx('auth-form-wrapper')}>
                 <h1 className={cx('auth-h1')}>Sign up</h1>
                 <form onSubmit={handleSubmit}>
                     <div className={cx('divide')}>
-                        <TextField
-                            sx={style}
+                        <MyTextField
                             className={cx('auth-input')}
                             size="small"
                             label="Enter FirstName"
@@ -155,8 +143,7 @@ function Register() {
                                 }
                             }}
                         />
-                        <TextField
-                            sx={style}
+                        <MyTextField
                             className={cx('auth-input')}
                             size="small"
                             label="Enter LastName"
@@ -176,8 +163,7 @@ function Register() {
                         />
                     </div>
 
-                    <TextField
-                        sx={style}
+                    <MyTextField
                         className={cx('auth-input')}
                         size="small"
                         label="Enter Email"
@@ -189,8 +175,7 @@ function Register() {
                         }}
                     />
 
-                    <TextField
-                        sx={style}
+                    <MyTextField
                         autoComplete="on"
                         className={cx('auth-input')}
                         size="small"
@@ -203,8 +188,7 @@ function Register() {
                         }}
                     />
 
-                    <TextField
-                        sx={style}
+                    <MyTextField
                         autoComplete="on"
                         className={cx('auth-input')}
                         size="small"

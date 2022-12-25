@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import images from '_/assets/img';
@@ -110,12 +111,12 @@ const SlideBaner = ({ content }) => {
         <div className={cx('wrapper')}>
             <div className={cx('banner-container')}>
                 <SlideItem slug={slug} url={url} />
-                <div onClick={goToPrevious} className={cx('left-arrow')}>
+                <Box sx={{ display: { 0: 'none', 760: 'block' } }} onClick={goToPrevious} className={cx('left-arrow')}>
                     ❰
-                </div>
-                <div onClick={goToNext} className={cx('right-arrow')}>
+                </Box>
+                <Box sx={{ display: { 0: 'none', 760: 'block' } }} onClick={goToNext} className={cx('right-arrow')}>
                     ❱
-                </div>
+                </Box>
 
                 <div className={cx('dots-container')}>
                     {useData.map((slide, slideIndex) => (

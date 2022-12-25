@@ -6,8 +6,9 @@ import { auth } from './firebase/firebaseConfig';
 
 import { faChevronCircleRight, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './Auth.modelu.scss';
 import { useNavigate } from 'react-router-dom';
+
+import styles from './Auth.modelu.scss';
 
 const cx = classNames.bind(styles);
 
@@ -17,7 +18,6 @@ function Logout() {
         e.preventDefault();
         signOut(auth)
             .then(() => {
-                // eslint-disable-next-line no-restricted-globals
                 navigate('/');
             })
             .catch((error) => {

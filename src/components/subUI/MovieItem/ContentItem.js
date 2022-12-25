@@ -7,25 +7,19 @@ import { serverTimestamp } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import SidebarPopper from '_/Popper/SidebarPopper';
+import { MyTooltip } from '_/components/CustomComponents/CustomComponents';
 import { useAuth } from '_/contexts/AuthContext';
 import AddDocumentBtn from '../AddMovieBtn/AddMovieBtn';
 import Button from '../Button/Button';
 import DeleteDocumentBtn from '../DeleteDocumentBtn/DeleteDocumentBtn';
+import LoginBtn from '../LoginBtn/LoginBtn';
 import styles from './MovieItem.module.scss';
+
 const cx = classNames.bind(styles);
-const LIBRARY_POPPER = [
-    {
-        title: 'Enjoy Your Saved Movies',
-        text: 'Log in to see saved movies.',
-    },
-];
 
 function ContentItem({ data, isWatchLater }) {
     const { uid } = useAuth();
     useEffect(() => {}, [data]);
-
-    console.log({ isWatchLater });
 
     const { name, originName, slug, thumbUrl, posterUrl } = data;
     const dataDoc = { name, originName, slug, thumbUrl, uid: [uid], posterUrl, createdAt: serverTimestamp() };
@@ -81,13 +75,30 @@ function ContentItem({ data, isWatchLater }) {
                             </div>
                         </Tooltip>
                     ) : (
-                        <SidebarPopper content={LIBRARY_POPPER}>
+                        <MyTooltip
+                            placement="bottom"
+                            arrow
+                            title={
+                                <div className={cx('tooltip-content')}>
+                                    <div className={cx('tooltip-title')}>
+                                        <h2>Enjoy Your Saved Movies</h2>
+                                    </div>
+                                    <p className={cx('tooltip-text')}>Log in to see saved movies.</p>
+                                    <div className={cx('tooltip-action')}>
+                                        {' '}
+                                        <LoginBtn primary scale className={cx('log-in')}>
+                                            Log in
+                                        </LoginBtn>
+                                    </div>
+                                </div>
+                            }
+                        >
                             <div className={cx('btn')}>
-                                <Button text className={cx('del-btn')}>
+                                <Button disable text className={cx('del-btn')}>
                                     <BookmarkAddIcon />
                                 </Button>
                             </div>
-                        </SidebarPopper>
+                        </MyTooltip>
                     )}
                 </div>
             </div>

@@ -1,28 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import moviesApi from '_/utils/api/moviesApi';
 
-///         scrollY -------------------------
-
-export const getScrollY = createAsyncThunk('scrollY/getScrollY', async (params, thunkAPI) => {
-    thunkAPI.dispatch(scrollYSlice.actions.changeLog);
-    return params;
-});
-
-export const scrollYSlice = createSlice({
-    name: 'scrollY',
-    initialState: {
-        state: window.scrollY,
-    },
-    reducers: {
-        getScrollY: (state, action) => {
-            state.state = action.payload.state;
-        },
-    },
-});
-
-const { reducer: getScrollYReducer } = scrollYSlice;
-export { getScrollYReducer };
-
 ///         overlay -------------------------
 
 export const setOverlay = createAsyncThunk('overlay/setOverlay', async (params, thunkAPI) => {

@@ -122,10 +122,6 @@ useBabelRc()
 
 ---
 
-## Cài thư viện tippy: `npm i @tippyjs/react`
-
----
-
 ## Cài thư viện axios: `npm install axios`
 
 ---

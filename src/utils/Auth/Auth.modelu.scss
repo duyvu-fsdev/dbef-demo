@@ -1,7 +1,6 @@
 .auth-wrapper {
     display: flex;
     justify-content: center;
-    // text-align: center;
     align-items: center;
 }
 
@@ -14,10 +13,8 @@
     .divide,
     .full {
         display: flex;
-        // div :nth(1) {
         margin-top: 5px;
         justify-content: center;
-        // }
         gap: 5px;
         * {
             display: flex;
@@ -45,7 +42,6 @@
         min-width: 100px;
         border-radius: 6px;
         width: 100%;
-        color: #fff;
         margin: 10px 0;
         // text-align: center;
     }

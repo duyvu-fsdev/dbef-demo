@@ -77,6 +77,7 @@
         width: 100%;
         padding: 0;
         display: flex;
+        justify-content: center;
     }
     .icon {
         width: 24px;
@@ -106,6 +107,29 @@
         fill: #fff;
         + .icon {
             margin-left: 12px;
+        }
+    }
+}
+
+.tooltip-content {
+    padding: 10px;
+    max-width: 300px;
+}
+
+.tooltip-text {
+    margin: 10px 0;
+}
+.tooltip-action {
+    .log-in,
+    .to-profile {
+        width: 100%;
+        text-align: center;
+        color: inherit;
+        border: 1px solid currentColor;
+        background-color: unset;
+        &:hover {
+            color: var(--main-color);
+            background-color: #000000b8;
         }
     }
 }

@@ -10,6 +10,7 @@ const FireStoreContext = createContext({
     movieData: null,
     userData: null,
     allMoviesData: null,
+    clearUserData: () => {},
 });
 
 export const useFireStore = () => useContext(FireStoreContext);
@@ -27,7 +28,8 @@ function FireStoreContextProvider({ children }) {
 
     useEffect(() => {
         setMovieData(movieDocuments);
-        setUserData(...userDocuments);
+        if (!uid) setUserData();
+        else setUserData(...userDocuments);
     }, [userDocuments, uid, movieDocuments]);
 
     useEffect(() => {
@@ -59,11 +61,15 @@ function FireStoreContextProvider({ children }) {
             .catch(() => {});
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    const clearUserData = () => {
+        setUserData();
+    };
 
     const value = {
         allMoviesData,
         userData,
         movieData,
+        clearUserData,
     };
 
     return <FireStoreContext.Provider value={value}>{children}</FireStoreContext.Provider>;

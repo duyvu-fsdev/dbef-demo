@@ -1,9 +1,10 @@
 import { doc, updateDoc } from '@firebase/firestore';
-import { InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { MyTextField } from '_/components/CustomComponents/CustomComponents';
 import { Button } from '_/components/subUI';
 import { showModalSlice } from '_/Hook/redux/slices';
 import { useFireStore } from '../../contexts/FireStoreContext';
@@ -15,7 +16,7 @@ const cx = classNames.bind(styles);
 
 function EditInfoUser() {
     const dispatch = useDispatch();
-    const [gender, setGender] = useState('0');
+    const [gender, setGender] = useState('female');
     const [birthYear, setbirthYear] = useState('');
     const [phoneNumber, setMobileNumber] = useState('');
     const mounted = useRef(false);
@@ -32,26 +33,10 @@ function EditInfoUser() {
         e.preventDefault();
         const { id } = userData;
         const ref = doc(db, 'users', id);
-        let uGender;
-        switch (gender) {
-            case 1:
-                uGender = 'Male';
-                break;
-            case 2:
-                uGender = 'Female';
-                break;
-            case 3:
-                uGender = 'Orther';
-                break;
-
-            default:
-                uGender = '';
-                break;
-        }
         const updateDataDoc = {
-            birthYear,
-            phoneNumber,
-            uGender,
+            birthYear: birthYear ? Number(birthYear) : 0,
+            phoneNumber: Number(phoneNumber),
+            gender,
         };
         updateDoc(ref, updateDataDoc).then(() => {
             dispatch(
@@ -62,33 +47,18 @@ function EditInfoUser() {
         });
     };
 
-    const style = {
-        '& label.Mui-focused': {
-            color: '#fff',
-        },
-        // '& .MuiOutlinedInput-root:hover': { borderColor: 'red' },
-        '& .MuiOutlinedInput-root': {
-            '& input': { color: '#fff' },
-            '&.Mui-focused fieldset': {
-                borderColor: '#fff',
-            },
-        },
-    };
-
     return (
         <div className={cx('auth-wrapper')}>
             <div className={cx('auth-form-wrapper')}>
                 <h1 className={cx('auth-h1')}>EditInfoUser</h1>
 
-                <form onSubmit={handleSubmit}>
-                    <TextField
+                <FormControl fullWidth onSubmit={handleSubmit}>
+                    <MyTextField
                         label="Phone Number"
-                        sx={style}
                         className={cx('auth-input')}
                         size="small"
                         type="text"
                         value={phoneNumber}
-                        required
                         onChange={(e) => {
                             let letter = e.target.value;
                             if (!letter.startsWith(' ')) {
@@ -98,54 +68,49 @@ function EditInfoUser() {
                         }}
                     />
                     <div>
-                        <TextField
+                        <MyTextField
                             label="Year of Birth (YYYY)"
-                            sx={style}
                             className={cx('auth-input')}
                             size="small"
                             type="text"
                             value={birthYear}
-                            required
                             onChange={(e) => {
                                 let letter = e.target.value;
-                                setbirthYear(() => {
-                                    if (!letter.startsWith(' '))
-                                        letter = removeVietnameseTones(letter)
-                                            .replace(/-|[A-z]| |/g, '')
-                                            .trim()
-                                            .slice(0, 4);
-
+                                if (!letter.startsWith(' ')) {
+                                    letter = removeVietnameseTones(letter)
+                                        .replace(/-|[A-z]/g, '')
+                                        .replace(/ /g, '')
+                                        .replace(/-/g, '')
+                                        .trim()
+                                        .slice(0, 4);
                                     const currentYear = Number(new Date().getFullYear());
                                     if (Number(letter) > currentYear) letter = currentYear.toString();
-                                    return letter;
-                                });
+                                    setbirthYear(letter);
+                                }
                             }}
                         />
                     </div>
 
-                    <InputLabel id="Gender">Choose gender</InputLabel>
-                    <Select
-                        sx={{ width: '100%' }}
-                        size="small"
-                        labelId="Gender"
-                        id="Gender"
+                    <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
+                    <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
                         value={gender}
-                        required
                         onChange={(e) => {
                             const value = e.target.value;
                             setGender(value);
                         }}
                     >
-                        <MenuItem value={0}>--</MenuItem>
-                        <MenuItem value={1}>Male</MenuItem>
-                        <MenuItem value={2}>Female</MenuItem>
-                        <MenuItem value={3}>Orther</MenuItem>
-                    </Select>
+                        <FormControlLabel value="female" control={<Radio />} label="Female" />
+                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+                        <FormControlLabel value="other" control={<Radio />} label="Other" />
+                    </RadioGroup>
 
-                    <Button primary className={cx('auth-btn')} type="submit">
+                    <Button primary className={cx('auth-btn')} type="submit" onClick={handleSubmit}>
                         Submit
                     </Button>
-                </form>
+                </FormControl>
             </div>
         </div>
     );

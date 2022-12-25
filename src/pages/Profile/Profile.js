@@ -28,7 +28,8 @@ function Profile() {
     const { userData, movieData } = useFireStore();
 
     useEffect(() => {
-        if (!uid) return;
+        if (!uid) navigate('/');
+        return;
     }, [uid]);
 
     useEffect(() => {
@@ -39,7 +40,7 @@ function Profile() {
     }, [userData]);
 
     // eslint-disable-next-line no-unused-vars
-    const { birthYear, createdAt, displayName, email, emailVerified, id, phoneNumber, photoURL, uGender } = data;
+    const { birthYear, createdAt, displayName, email, emailVerified, id, phoneNumber, photoURL, gender } = data;
 
     const handleEdit = () => {
         dispatch(
@@ -87,7 +88,7 @@ function Profile() {
                                 return;
                             }
 
-                            await deleteDoc(dbRef);
+                            await deleteDoc(dbRef).then(() => {});
                         })();
                     });
                     return e;
@@ -102,7 +103,7 @@ function Profile() {
                                 navigate('/');
                             });
                         })();
-                    }, 3000);
+                    }, 5000);
                 })
                 .catch((error) => console.log(error));
 
@@ -139,7 +140,7 @@ function Profile() {
                             </div>
                             <div className={cx('account')}>
                                 <span className={cx('title')}>Gender : </span>
-                                <span className={cx('msg')}>{uGender || 'Not Set'}</span>
+                                <span className={cx('msg')}>{gender || 'Not Set'}</span>
                             </div>
                             <div className={cx('account')}>
                                 <span className={cx('title')}>Birth : </span>

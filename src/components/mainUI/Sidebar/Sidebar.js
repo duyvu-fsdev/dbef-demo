@@ -13,19 +13,13 @@ import { Button } from '_/components/subUI';
 import LoginBtn from '_/components/subUI/LoginBtn/LoginBtn';
 import { useAuth } from '_/contexts/AuthContext';
 import { routes } from '_/pages/routes';
-import SidebarPopper from '_/Popper/SidebarPopper';
 
 import { Box, Tooltip } from '@mui/material';
 import styles from './Sidebar.module.scss';
+import { MyTooltip } from '_/components/CustomComponents/CustomComponents';
 
 const cx = classNames.bind(styles);
 
-const LIBRARY_POPPER = [
-    {
-        title: 'Enjoy Your Saved Movies',
-        text: 'Log in to see saved movies.',
-    },
-];
 // const CREATE_PLAYLIST_POPPER = [
 //     {
 //         title: 'Create a playlist',
@@ -104,6 +98,7 @@ function Sidebar() {
                                         <Box sx={{ marginLeft: '10px' }}> Watch later</Box>
                                     </Box>
                                 </Button>
+
                                 {/* <Button to="createplaylist" text className={cx('sidebar-btn')}>
                                     
                                         {uiWidth < 1404 ? (
@@ -135,7 +130,26 @@ function Sidebar() {
                         ) : (
                             <>
                                 <div>
-                                    <SidebarPopper content={LIBRARY_POPPER} placement={'right'}>
+                                    <MyTooltip
+                                        placement="right"
+                                        arrow
+                                        title={
+                                            <div className={cx('tooltip-content')}>
+                                                <div className={cx('tooltip-title')}>
+                                                    <h2>Enjoy Your Saved Movies</h2>
+                                                </div>
+                                                <p className={cx('tooltip-text')}>
+                                                    Log in to see all the movies you’ve liked in one easy playlist.
+                                                </p>
+                                                <div className={cx('tooltip-action')}>
+                                                    {' '}
+                                                    <LoginBtn primary scale className={cx('log-in')}>
+                                                        Log in
+                                                    </LoginBtn>
+                                                </div>
+                                            </div>
+                                        }
+                                    >
                                         <div>
                                             <Button text className={cx('sidebar-btn')}>
                                                 <Box sx={{ display: { 0: 'flex', 1600: 'none' } }}>
@@ -147,7 +161,7 @@ function Sidebar() {
                                                 </Box>
                                             </Button>
                                         </div>
-                                    </SidebarPopper>
+                                    </MyTooltip>
                                 </div>
 
                                 {/* <div>

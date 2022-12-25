@@ -1,7 +1,3 @@
-function scrollY(state) {
-    return state.scrollY.state;
-}
-
 function checkLog(state) {
     return state.checklog.state;
 }
@@ -25,4 +21,4 @@ function movies(state) {
     return state.movies.current;
 }
 
-export const selector = { scrollY, movies, checkLog, setOverlay, changeForm, showModal, showNotif };
+export const selector = { movies, checkLog, setOverlay, changeForm, showModal, showNotif };

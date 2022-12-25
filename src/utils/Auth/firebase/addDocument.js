@@ -16,7 +16,7 @@ function addDocument(user, fullName) {
             uid,
             phoneNumber,
             emailVerified,
-            uGender: null,
+            gender: null,
             birthYear: null,
         };
 

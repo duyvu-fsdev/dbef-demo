@@ -10,7 +10,6 @@ const cx = classNames.bind(styles);
 
 function Content({ children }) {
     const { allMoviesData } = useFireStore();
-
     return (
         <div className={cx('wrapper')}>
             <Box

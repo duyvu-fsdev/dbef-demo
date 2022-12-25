@@ -1,5 +1,4 @@
 import FacebookIcon from '@mui/icons-material/Facebook';
-import { TextField } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -9,6 +8,7 @@ import { changeFormSlice, showModalSlice, showNotifSlice } from '_/Hook/redux/sl
 import { useAuth } from '_/contexts/AuthContext';
 import styles from './Auth.modelu.scss';
 import addDocument from './firebase/addDocument';
+import { MyTextField } from '_/components/CustomComponents/CustomComponents';
 
 const cx = classNames.bind(styles);
 
@@ -41,7 +41,7 @@ function Login() {
                     state: { open: false, message: '', type: '' },
                 }),
             );
-        }, 5000);
+        }, 2000);
     };
 
     const handleSubmit = async (e) => {
@@ -175,7 +175,7 @@ function Login() {
                 <h1 className={cx('auth-h1')}>Log in</h1>
 
                 <form onSubmit={handleSubmit}>
-                    <TextField
+                    <MyTextField
                         sx={style}
                         className={cx('auth-input')}
                         size="small"
@@ -187,7 +187,7 @@ function Login() {
                             setEmail(e.target.value);
                         }}
                     />
-                    <TextField
+                    <MyTextField
                         sx={style}
                         autoComplete="off"
                         className={cx('auth-input')}

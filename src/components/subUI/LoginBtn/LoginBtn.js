@@ -1,6 +1,5 @@
 // import { Button } from '@mui/material';
 import classNames from 'classnames/bind';
-import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { changeFormSlice, showModalSlice } from '_/Hook/redux/slices';
@@ -10,7 +9,7 @@ import styles from './LoginBtn.module.scss';
 
 const cx = classNames.bind(styles);
 
-const LoginBtn = ({ className, children }) => {
+const LoginBtn = ({ className, children, disable = false }) => {
     const dispatch = useDispatch();
     const handleShowModal = () => {
         dispatch(
@@ -30,14 +29,11 @@ const LoginBtn = ({ className, children }) => {
     });
 
     return (
-        // <button onClick={handleShowModal} className={classes} {...props}>
-        //     <span className={cx('title')}>{children}</span>
-        // </button>
-        <Button outline onClick={handleShowModal} className={classes}>
+        <Button outline disable={disable} onClick={handleShowModal} className={classes}>
             {children}
             {/* <LoginIcon /> */}
         </Button>
     );
 };
 
-export default memo(LoginBtn);
+export default LoginBtn;

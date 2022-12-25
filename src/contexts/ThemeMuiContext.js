@@ -1,4 +1,4 @@
-import { createTheme, outlinedInputClasses, ThemeProvider } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
 import { grey, lightBlue } from '@mui/material/colors';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -33,18 +33,6 @@ function ThemeMuiContextProvider({ children }) {
             },
         },
         components: {
-            MuiOutlinedInput: {
-                styleOverrides: {
-                    root: {
-                        [`&.${outlinedInputClasses.notchedOutline}`]: {
-                            '&.Mui-focused fieldset': {
-                                borderColor: '#fff',
-                                color: '#fff',
-                            },
-                        },
-                    },
-                },
-            },
             MuiTooltip: {
                 styleOverrides: {
                     tooltip: { maxWidth: '360px', fontSize: '1.4rem', backgroundColor: '#616161', borderRadius: 6 },
@@ -56,7 +44,7 @@ function ThemeMuiContextProvider({ children }) {
                 },
             },
         },
-        spacing: 10,
+        spacing: 2,
         palette: {
             mode,
 
