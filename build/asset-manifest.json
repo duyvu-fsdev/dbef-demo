@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/dbef-demo/static/css/main.b820a300.css",
+    "main.js": "/dbef-demo/static/js/main.f10040e3.js",
+    "static/js/787.db33642e.chunk.js": "/dbef-demo/static/js/787.db33642e.chunk.js",
+    "static/media/NoPoster.png": "/dbef-demo/static/media/NoPoster.c1ff354d03736d2198c3.png",
+    "static/media/vip.svg": "/dbef-demo/static/media/vip.5e273d95d4e0e10d64c40e57a826e6ae.svg",
+    "static/media/logoIcon.svg": "/dbef-demo/static/media/logoIcon.a49791d295946d6b903ffa1905a2248e.svg",
+    "index.html": "/dbef-demo/index.html",
+    "static/media/searchIcon.svg": "/dbef-demo/static/media/searchIcon.6ece93c0d61d10f33647af3ae845c98f.svg",
+    "static/media/search.svg": "/dbef-demo/static/media/search.add19116a8d54271a25b3cc8107d8dac.svg",
+    "static/media/facebook.svg": "/dbef-demo/static/media/facebook.136ec4b2c61d11b2f23d0673f63e2033.svg",
+    "static/media/libraryIcon.svg": "/dbef-demo/static/media/libraryIcon.616ff06ddefaffe82b0b80140c5542fe.svg",
+    "static/media/clearIcon.svg": "/dbef-demo/static/media/clearIcon.0b731f278d3bc3e2c8252c476e08af40.svg",
+    "static/media/homeIcon.svg": "/dbef-demo/static/media/homeIcon.8c203bcaf3b511fe43473ce33a8d4a29.svg",
+    "static/media/forwardIcon.svg": "/dbef-demo/static/media/forwardIcon.96e202b80da8040732cb26275d267402.svg",
+    "static/media/backIcon.svg": "/dbef-demo/static/media/backIcon.f220972720244acad1942bc2eb619265.svg",
+    "static/media/logo.svg": "/dbef-demo/static/media/logo.7711f263bcebdb89b03a1d2a1a6505d2.svg",
+    "main.b820a300.css.map": "/dbef-demo/static/css/main.b820a300.css.map",
+    "main.f10040e3.js.map": "/dbef-demo/static/js/main.f10040e3.js.map",
+    "787.db33642e.chunk.js.map": "/dbef-demo/static/js/787.db33642e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b820a300.css",
+    "static/js/main.f10040e3.js"
+  ]
+}
