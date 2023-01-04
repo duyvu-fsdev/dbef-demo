@@ -2,13 +2,13 @@ import { SearchLayout } from '_/Layouts';
 import { Home, ListUpdate, MovieDetails, Play, Search, NotFoundPage, Profile, WatchLater } from '_/pages';
 
 const routes = {
-    home: '/',
-    search: '/search',
-    phim: '/phim&name=:any',
-    play: '/xem-phim&name=:any&id=:any&ep=:any',
-    list: '/danh-sach/phim-moi-cap-nhat&:id',
-    profile: '/profile',
-    watchLater: '/watchLater',
+    home: '/dbef-demo',
+    search: '/dbef-demo/search',
+    phim: '/dbef-demo/phim&name=:any',
+    play: '/dbef-demo/xem-phim&name=:any&id=:any&ep=:any',
+    list: '/dbef-demo/danh-sach/phim-moi-cap-nhat&:id',
+    profile: '/dbef-demo/profile',
+    watchLater: '/dbef-demo/watchLater',
     notfoundpage: '*',
 };
 
