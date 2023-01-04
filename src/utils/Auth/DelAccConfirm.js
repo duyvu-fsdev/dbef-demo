@@ -6,11 +6,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useAuth } from '../../contexts/AuthContext';
 import { useFireStore } from '../../contexts/FireStoreContext';
 import { db } from './firebase/firebaseConfig';
 
 export default function AlertDialog() {
+    const navigate = useNavigate();
     const [id, setId] = useState();
     const [open, setOpen] = useState(false);
     const { deleteAccont } = useAuth();
@@ -46,7 +49,7 @@ export default function AlertDialog() {
                 await deleteDoc(dbRef).then(() => {
                     deleteAccont();
                     // eslint-disable-next-line no-restricted-globals
-                    location.replace(window.location);
+                    navigate('/dbef-demo');
                 });
             })();
             return;
@@ -57,7 +60,7 @@ export default function AlertDialog() {
             await deleteDoc(dbRef).then(() => {
                 deleteAccont();
                 // eslint-disable-next-line no-restricted-globals
-                location.replace(window.location);
+                navigate('/dbef-demo');
             });
         })();
     };

@@ -30,7 +30,7 @@ function Profile() {
 
     useEffect(() => {
         const idTimeOut = setTimeout(() => {
-            if (!uid) navigate('/');
+            if (!uid) navigate('/dbef-demo');
             return;
         }, 500);
 
@@ -117,7 +117,7 @@ function Profile() {
                                         state: false,
                                     }),
                                 );
-                                navigate('/');
+                                navigate('/dbef-demo');
                             });
                         })();
                     }, 5000);
@@ -136,7 +136,7 @@ function Profile() {
                         state: false,
                     }),
                 );
-                navigate('/');
+                navigate('/dbef-demo');
             });
         })();
     };

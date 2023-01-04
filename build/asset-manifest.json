@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/dbef-demo/static/css/main.b820a300.css",
-    "main.js": "/dbef-demo/static/js/main.f10040e3.js",
+    "main.js": "/dbef-demo/static/js/main.6b46bab4.js",
     "static/js/787.db33642e.chunk.js": "/dbef-demo/static/js/787.db33642e.chunk.js",
     "static/media/NoPoster.png": "/dbef-demo/static/media/NoPoster.c1ff354d03736d2198c3.png",
     "static/media/vip.svg": "/dbef-demo/static/media/vip.5e273d95d4e0e10d64c40e57a826e6ae.svg",
@@ -17,11 +17,11 @@
     "static/media/backIcon.svg": "/dbef-demo/static/media/backIcon.f220972720244acad1942bc2eb619265.svg",
     "static/media/logo.svg": "/dbef-demo/static/media/logo.7711f263bcebdb89b03a1d2a1a6505d2.svg",
     "main.b820a300.css.map": "/dbef-demo/static/css/main.b820a300.css.map",
-    "main.f10040e3.js.map": "/dbef-demo/static/js/main.f10040e3.js.map",
+    "main.6b46bab4.js.map": "/dbef-demo/static/js/main.6b46bab4.js.map",
     "787.db33642e.chunk.js.map": "/dbef-demo/static/js/787.db33642e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b820a300.css",
-    "static/js/main.f10040e3.js"
+    "static/js/main.6b46bab4.js"
   ]
 }
