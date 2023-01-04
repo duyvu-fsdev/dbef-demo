@@ -98,7 +98,7 @@ function Action(props) {
             <Box sx={{ width: { 0: '100%', 480: '480px', 720: '320px' }, margin: '0 auto', ...styles }}>
                 <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={1} className={cx('action-warrper')}>
                     <Box gridColumn="span 4">
-                        <Button text to={`/xem-phim&name=${slug}&id=0&ep=1`} className={cx('action-btn')}>
+                        <Button text to={`/dbef-demo/xem-phim&name=${slug}&id=0&ep=1`} className={cx('action-btn')}>
                             <PlayArrowIcon />
                         </Button>
                     </Box>

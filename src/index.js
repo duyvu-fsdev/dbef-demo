@@ -13,20 +13,20 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    //   <StrictMode>
-    <ThemeMuiContextProvider>
-        <CssBaseline />
-        <GlobalStyles>
-            <Provider store={store}>
-                <AuthContextProvider>
-                    <FireStoreContextProvider>
-                        <App />
-                    </FireStoreContextProvider>
-                </AuthContextProvider>
-            </Provider>
-        </GlobalStyles>
-    </ThemeMuiContextProvider>,
-    //  </StrictMode>
+    <StrictMode>
+        <ThemeMuiContextProvider>
+            <CssBaseline />
+            <GlobalStyles>
+                <Provider store={store}>
+                    <AuthContextProvider>
+                        <FireStoreContextProvider>
+                            <App />
+                        </FireStoreContextProvider>
+                    </AuthContextProvider>
+                </Provider>
+            </GlobalStyles>
+        </ThemeMuiContextProvider>
+    </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

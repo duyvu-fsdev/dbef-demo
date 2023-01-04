@@ -48,7 +48,11 @@ function Home() {
                         <div className={cx('children-content')}>
                             <div className={cx('title')}>
                                 <div>Phim mới cập nhật</div>
-                                <Button to={`/danh-sach/phim-moi-cap-nhat&page=1.html`} className={cx('see-more')} text>
+                                <Button
+                                    to={`/dbef-demo/danh-sach/phim-moi-cap-nhat&page=1.html`}
+                                    className={cx('see-more')}
+                                    text
+                                >
                                     Xem thêm
                                 </Button>
                             </div>

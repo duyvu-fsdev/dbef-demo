@@ -27,7 +27,7 @@ function ContentItem({ data, isWatchLater }) {
     return (
         <div className={cx('item')}>
             <div className={cx('item-container')}>
-                <Link className={cx('link')} to={`/phim&name=${slug}`}>
+                <Link className={cx('link')} to={`/dbef-demo/phim&name=${slug}`}>
                     <div className={cx('image-container')}>
                         <div className={cx('image')}>
                             <img className={cx('thubm')} src={thumbUrl} alt={name} />
@@ -46,7 +46,7 @@ function ContentItem({ data, isWatchLater }) {
                 <div className={cx('actions')}>
                     <Tooltip arrow title="Play">
                         <div className={cx('btn')}>
-                            <Button to={`/xem-phim&name=${slug}&id=0&ep=1`} text>
+                            <Button to={`/dbef-demo/xem-phim&name=${slug}&id=0&ep=1`} text>
                                 <PlayArrowIcon sx={{ fontSize: '2rem' }} />
                             </Button>
                         </div>

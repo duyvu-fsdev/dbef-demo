@@ -21,7 +21,7 @@ function ListEp(props) {
                 '--background-color': color,
             }}
             onClick={() => handleEpchange(id + 1, data.name, id)}
-            to={`/xem-phim&name=${slug}&id=${id}&ep=${data.name}`}
+            to={`/dbef-demo/xem-phim&name=${slug}&id=${id}&ep=${data.name}`}
             className={cx('e-num')}
         >
             {data.name}

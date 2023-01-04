@@ -32,7 +32,7 @@ function UserPopper({ classes }) {
                     <h3 className={cx('display-name')}>{currentUser.displayName}</h3>
                 </div>
                 <Button
-                    to={'/profile'}
+                    to={/dbef-demo/profile'}
                     text
                     className={cx('user-popper-btn')}
                     leftIcon={<ChevronRightIcon fontSize="large" />}
@@ -41,7 +41,7 @@ function UserPopper({ classes }) {
                     Profile
                 </Button>
                 <Button
-                    to={'/watchlater'}
+                    to={/dbef-demo/watchLater'}
                     text
                     className={cx('user-popper-btn')}
                     leftIcon={<ChevronRightIcon fontSize="large" />}
