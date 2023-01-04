@@ -8,13 +8,14 @@ import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 import { Button } from '_/components/subUI';
 import UserAvatar from '_/components/subUI/Avatar/Avatar';
-import { changeFormSlice, showModalSlice } from '_/Hook/redux/slices';
-import { db } from '_/utils/Auth/firebase/firebaseConfig';
 import { useAuth } from '_/contexts/AuthContext';
 import { useFireStore } from '_/contexts/FireStoreContext';
+import { changeFormSlice, showLoadingSlice, showModalSlice } from '_/Hook/redux/slices';
+import { db } from '_/utils/Auth/firebase/firebaseConfig';
 import styles from './Profile.module.scss';
 
 const cx = classNames.bind(styles);
@@ -28,15 +29,20 @@ function Profile() {
     const { userData, movieData } = useFireStore();
 
     useEffect(() => {
-        if (!uid) navigate('/');
-        return;
+        const idTimeOut = setTimeout(() => {
+            if (!uid) navigate('/');
+            return;
+        }, 500);
+
+        return clearTimeout(idTimeOut);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uid]);
 
     useEffect(() => {
         if (!userData) return;
         if (userData.length === 0) return;
         const { createdAt } = userData;
-        setData({ ...userData, createdAt: new Date(createdAt.seconds * 1000).toString() });
+        setData({ ...userData, createdAt: new Date(createdAt.seconds * 1000).toString().slice(4, 15) });
     }, [userData]);
 
     // eslint-disable-next-line no-unused-vars
@@ -50,7 +56,7 @@ function Profile() {
         );
         dispatch(
             changeFormSlice.actions.changeForm({
-                state: { login: false, fogot: false, reg: false, edit: true },
+                state: { edit: true },
             }),
         );
     };
@@ -64,6 +70,11 @@ function Profile() {
     };
 
     const handleDelete = async () => {
+        dispatch(
+            showLoadingSlice.actions.showLoading({
+                state: true,
+            }),
+        );
         if (movieData.length !== 0) {
             new Promise((myResolve, myReject) => {
                 myResolve(); // when successful
@@ -100,6 +111,12 @@ function Profile() {
                         (async () => {
                             await deleteDoc(dbRef).then(() => {
                                 deleteAccont();
+
+                                dispatch(
+                                    showLoadingSlice.actions.showLoading({
+                                        state: false,
+                                    }),
+                                );
                                 navigate('/');
                             });
                         })();
@@ -114,15 +131,25 @@ function Profile() {
             const dbRef = doc(collectionRef, id);
             await deleteDoc(dbRef).then(() => {
                 deleteAccont();
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 navigate('/');
             });
         })();
     };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('settings-detail')}>
-                    <div className={cx('sub-title')}>Profile</div>
+                    <Box
+                        sx={{ fontSize: '1.6rem', lineHeight: '19px', margin: '12px', textAlign: 'left', opacity: 0.5 }}
+                    >
+                        Profile
+                    </Box>
                     <div className={cx('form-group')}>
                         <div className={cx('account-box')}>
                             <div className={cx('portrait-container')}>
@@ -147,21 +174,21 @@ function Profile() {
                                 <span className={cx('msg')}>{birthYear || 'Not Set'}</span>
                             </div>
                             <div className={cx('account')}>
-                                <p className={cx('title')}>Email :</p>
+                                <span className={cx('title')}>Email :</span>
                                 <span className={cx('msg')}>
                                     {email + ' ' + (emailVerified ? '(Activated)' : '(Not activated)')}
                                 </span>
                             </div>
                             <div className={cx('account')}>
-                                <p className={cx('title')}>Mobile number :</p>
+                                <span className={cx('title')}>Mobile number :</span>
                                 <span className={cx('msg')}>{phoneNumber || 'Not Set'}</span>
                             </div>
                             <div className={cx('account')}>
-                                <p className={cx('title')}>uid :</p>
+                                <span className={cx('title')}>uid :</span>
                                 <span className={cx('msg')}>{uid || 'Not Set'}</span>
                             </div>
                             <div className={cx('account')}>
-                                <p className={cx('title')}>Time joined :</p>
+                                <span className={cx('title')}>Time joined :</span>
                                 <span className={cx('msg')}>{createdAt || 'Updating'}</span>
                             </div>
 

@@ -4,7 +4,7 @@ import moviesApi from '_/utils/api/moviesApi';
 ///         overlay -------------------------
 
 export const setOverlay = createAsyncThunk('overlay/setOverlay', async (params, thunkAPI) => {
-    thunkAPI.dispatch(overlaySlice.actions.changeLog);
+    thunkAPI.dispatch(overlaySlice.actions.setOverlay);
     return params;
 });
 
@@ -129,14 +129,14 @@ export function getAllUrlParams() {
 ///         changeForm -------------------------
 
 export const changeForm = createAsyncThunk('changeLog/changeForm', async (params, thunkAPI) => {
-    thunkAPI.dispatch(changeFormSlice.actions.changeLog);
+    thunkAPI.dispatch(changeFormSlice.actions.changeForm);
     return params;
 });
 
 export const changeFormSlice = createSlice({
     name: 'changeForm',
     initialState: {
-        state: { login: true, fogot: false, reg: false, edit: false },
+        state: { login: false, fogot: false, reg: false, edit: false },
     },
     reducers: {
         changeForm: (state, action) => {
@@ -151,7 +151,7 @@ export { changeFormReducer };
 ///         showModal -------------------------
 
 export const showModal = createAsyncThunk('changeLog/showModal', async (params, thunkAPI) => {
-    thunkAPI.dispatch(showModalSlice.actions.changeLog);
+    thunkAPI.dispatch(showModalSlice.actions.showModal);
     return params;
 });
 
@@ -173,7 +173,7 @@ export { showModalReducer };
 ///         showNotif -------------------------
 
 export const showNotif = createAsyncThunk('changeLog/showNotif', async (params, thunkAPI) => {
-    thunkAPI.dispatch(showNotifSlice.actions.changeLog);
+    thunkAPI.dispatch(showNotifSlice.actions.showNotif);
     return params;
 });
 
@@ -192,4 +192,24 @@ export const showNotifSlice = createSlice({
 const { reducer: showNotifReducer } = showNotifSlice;
 export { showNotifReducer };
 
-////////////////////////////$RECYCLE.BIN
+///         showLoading -------------------------
+
+export const showLoading = createAsyncThunk('changeLog/showLoading', async (params, thunkAPI) => {
+    thunkAPI.dispatch(showLoadingSlice.actions.showLoading);
+    return params;
+});
+
+export const showLoadingSlice = createSlice({
+    name: 'showLoading',
+    initialState: {
+        state: false,
+    },
+    reducers: {
+        showLoading: (state, action) => {
+            state.state = action.payload.state;
+        },
+    },
+});
+
+const { reducer: showLoadingReducer } = showLoadingSlice;
+export { showLoadingReducer };

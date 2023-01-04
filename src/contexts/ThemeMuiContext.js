@@ -1,14 +1,22 @@
-import { createTheme, ThemeProvider } from '@mui/material';
+import { createTheme, ThemeProvider, useTheme } from '@mui/material';
 import { grey, lightBlue } from '@mui/material/colors';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-const ThemeMuiContext = createContext({ switchMode: () => {} });
+const ThemeMuiContext = createContext({
+    showSidebar: null,
+    backgroundColor: '',
+    color: '',
+    switchMode: () => {},
+    switchSidebar: () => {},
+});
 
-export const useMode = () => useContext(ThemeMuiContext);
+export const useThemMui = () => useContext(ThemeMuiContext);
 
 function ThemeMuiContextProvider({ children }) {
+    const them = useTheme();
     localStorage.getItem('testObject');
     const [mode, setMode] = useState(JSON.parse(localStorage.getItem('mode')) || 'light');
+    const [showSidebar, setShow] = useState(false);
 
     useEffect(() => {
         localStorage.setItem('mode', JSON.stringify(mode));
@@ -17,25 +25,46 @@ function ThemeMuiContextProvider({ children }) {
     const switchMode = () => {
         setMode(mode === 'light' ? 'dark' : 'light');
     };
+    const switchSidebar = () => {
+        setShow(!showSidebar);
+    };
 
     const theme = createTheme({
         breakpoints: {
             values: {
                 0: 0,
+                240: 240,
                 320: 320,
+                400: 400,
                 480: 480,
-                760: 760,
+                560: 560,
+                640: 640,
+                720: 720,
+                800: 800,
+                880: 880,
                 960: 960,
+                1040: 1040,
+                1120: 1120,
                 1200: 1200,
+                1280: 1280,
                 1360: 1360,
-                1480: 1480,
+                1440: 1440,
+                1520: 1520,
                 1600: 1600,
+                1680: 1680,
+                1760: 1760,
+                1840: 1840,
+                1920: 1920,
             },
         },
         components: {
             MuiTooltip: {
                 styleOverrides: {
-                    tooltip: { maxWidth: '360px', fontSize: '1.4rem', backgroundColor: '#616161', borderRadius: 6 },
+                    tooltip: {
+                        maxWidth: '360px',
+                        fontSize: '1.4rem',
+                        backgroundColor: '#616161',
+                    },
                     arrow: {
                         '::before': {
                             backgroundColor: '#616161',
@@ -56,8 +85,8 @@ function ThemeMuiContextProvider({ children }) {
                       },
                       divider: lightBlue[700],
                       background: {
-                          default: lightBlue[100],
-                          paper: lightBlue[100],
+                          default: 'var(--background-color)',
+                          paper: 'var(--background-color)',
                       },
                       text: {
                           primary: '#000',
@@ -174,7 +203,9 @@ function ThemeMuiContextProvider({ children }) {
         },
     });
 
-    const value = { theme, switchMode };
+    const backgroundColor = them.palette.background.default;
+    const color = them.palette.text.primary;
+    const value = { theme, backgroundColor, color, switchMode, showSidebar, switchSidebar };
 
     return (
         <ThemeMuiContext.Provider value={value}>

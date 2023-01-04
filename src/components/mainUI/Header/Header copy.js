@@ -1,9 +1,10 @@
 import { useTheme } from '@emotion/react';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import { IconButton, Toolbar, Tooltip, Zoom } from '@mui/material';
+import { ClickAwayListener, IconButton, Toolbar, Tooltip, Zoom } from '@mui/material';
 import { Box } from '@mui/system';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 
 import { LogoIcon } from '_/assets/Icon';
 import { MyAppBar } from '_/components/CustomComponents/CustomComponents';
@@ -24,6 +25,15 @@ function Header({ search = true }) {
     const { currentUser } = useAuth();
     const theme = useTheme();
     const { switchMode } = useThemMui();
+    const [open, setOpen] = useState(false);
+
+    const handleTooltipClose = () => {
+        setOpen(false);
+    };
+
+    const handleTooltipOpen = () => {
+        setOpen(true);
+    };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -63,7 +73,7 @@ function Header({ search = true }) {
                                         <div className={cx('has-user')}>
                                             {currentUser !== null && (
                                                 <>
-                                                    <Tooltip
+                                                    {/* <Tooltip
                                                         className={cx('tooltip')}
                                                         title={<UserPopper />}
                                                         arrow
@@ -75,7 +85,28 @@ function Header({ search = true }) {
                                                         <div className={cx('user-box')}>
                                                             <UserAvatar />
                                                         </div>
-                                                    </Tooltip>
+                                                    </Tooltip> */}
+
+                                                    <ClickAwayListener onClickAway={handleTooltipClose}>
+                                                        <Tooltip
+                                                            className={cx('tooltip')}
+                                                            title={<UserPopper />}
+                                                            arrow
+                                                            TransitionComponent={Zoom}
+                                                            PopperProps={{
+                                                                disablePortal: true,
+                                                            }}
+                                                            onClose={handleTooltipClose}
+                                                            open={open}
+                                                            disableFocusListener
+                                                            disableHoverListener
+                                                            disableTouchListener
+                                                        >
+                                                            <div onClick={handleTooltipOpen} className={cx('user-box')}>
+                                                                <UserAvatar />
+                                                            </div>
+                                                        </Tooltip>
+                                                    </ClickAwayListener>
                                                 </>
                                             )}
                                         </div>

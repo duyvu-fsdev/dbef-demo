@@ -2,7 +2,7 @@ import { collection, doc, getDoc, setDoc, updateDoc } from '@firebase/firestore'
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 
-import { showNotifSlice } from '_/Hook/redux/slices';
+import { showLoadingSlice, showNotifSlice } from '_/Hook/redux/slices';
 import { db } from '_/utils/Auth/firebase/firebaseConfig';
 import Button from '../Button/Button';
 import styles from '../Button/Button.module.scss';
@@ -31,6 +31,11 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
     };
 
     const handleSetDocument = async (collectionName, data = {}, id, uid) => {
+        dispatch(
+            showLoadingSlice.actions.showLoading({
+                state: true,
+            }),
+        );
         const collectionRef = collection(db, collectionName);
         const dbRef = doc(collectionRef, id);
         const docSnap = await getDoc(dbRef);
@@ -39,6 +44,11 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
             const data = docSnap.data();
 
             if (data.uid?.includes(uid)) {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 handleShowSnackbar({
                     type: 'warning',
                     open: true,
@@ -50,6 +60,11 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
 
             updateDoc(dbRef, { uid: [...data.uid, uid] })
                 .then(() => {
+                    dispatch(
+                        showLoadingSlice.actions.showLoading({
+                            state: false,
+                        }),
+                    );
                     handleShowSnackbar({
                         type: 'success',
                         open: true,
@@ -58,6 +73,11 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
                     handleHideSnackbar();
                 })
                 .catch((error) => {
+                    dispatch(
+                        showLoadingSlice.actions.showLoading({
+                            state: false,
+                        }),
+                    );
                     console.log('Unsuccessful operation, error' + error);
                     handleShowSnackbar({
                         type: 'error',
@@ -72,6 +92,11 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
 
         await setDoc(dbRef, data)
             .then(() => {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 handleShowSnackbar({
                     type: 'success',
                     open: true,
@@ -80,6 +105,11 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
                 handleHideSnackbar();
             })
             .catch((error) => {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 console.log('Unsuccessful operation, error' + error);
                 handleShowSnackbar({
                     type: 'error',

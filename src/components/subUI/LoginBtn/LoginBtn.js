@@ -19,7 +19,7 @@ const LoginBtn = ({ className, children, disable = false }) => {
         );
         dispatch(
             changeFormSlice.actions.changeForm({
-                state: { login: true, fogot: false, reg: false, edit: false },
+                state: { login: true },
             }),
         );
     };

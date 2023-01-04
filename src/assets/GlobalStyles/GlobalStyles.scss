@@ -8,8 +8,7 @@
     --main-color: #f2bf83;
     // --main-color: #000;
 
-    --background-color: #212121;
-
+    --background-color: #fff;
     --header-height: 64px;
     --header-acction-height: 36px;
     --icon-header-height: 24px;
@@ -20,6 +19,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-wrap: break-word;
 }
 // scrollbar
 
@@ -30,9 +30,8 @@ html *::-webkit-scrollbar {
 
 html *::-webkit-scrollbar-thumb {
     height: 56px;
-    border-radius: 8px;
-    border: 1px solid #000;
-    // border: none;
+    border-radius: 6px;
+    border: 2px solid #333;
     background-clip: content-box;
     background-color: #fff;
 }
@@ -57,6 +56,7 @@ body {
     // color: var(--main-color);
     color: #000;
     user-select: none;
+    min-width: 320px;
 }
 
 button {

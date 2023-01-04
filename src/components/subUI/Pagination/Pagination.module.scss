@@ -2,8 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // color: #fff;
-
     margin: 15px auto;
 }
 
@@ -11,15 +9,13 @@
 .next-button,
 .go-button {
     display: flex;
-    border: 1px solid #fff;
-    color: #fff;
+    border: 1px solid currentColor;
+    color: inherit;
     padding: 10px 15px;
     min-width: 40px;
-    background-color: var(--background-color);
-    margin: 5px;
+    // background-color: var(--background-color);
     font-weight: 400;
     &:hover {
-        // box-shadow: 0 8px 24px rgb(0 0 0 / 50%);
         background-color: #333;
         color: var(--main-color);
         cursor: pointer;
@@ -41,11 +37,13 @@
     padding: 8px 0;
     font-size: 1.6rem;
     width: 60px;
-    color: inherit;
-    margin-left: 20px;
+    margin: 0 5px;
     text-align: center;
+    color: inherit;
 }
 
 .current-page {
-    margin: 0 10px;
+    margin: 0 5px;
+    border: 1px solid currentColor;
+    padding: 5.7px 10px;
 }

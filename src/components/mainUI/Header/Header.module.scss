@@ -7,7 +7,7 @@
 }
 
 .inner {
-    max-width: 1800px;
+    max-width: 1920px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,8 +22,22 @@
     display: flex;
     padding: 0;
     margin: 0;
-    border: 0;
+    // border: 1px solid currentColor;
     align-items: center;
+
+    @keyframes draw {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+    path {
+        stroke-width: 3px;
+        stroke: var(--main-color);
+        fill: none;
+        stroke-dasharray: 700;
+        stroke-dashoffset: 1400;
+        animation: draw 10s infinite linear;
+    }
 }
 
 .nav {
@@ -59,7 +73,7 @@
     }
 }
 
-// < 1200
+// < 1280
 
 .nav-bars {
     .bars-popper-container,
@@ -208,4 +222,8 @@
 
 .display-name {
     margin-left: 6px;
+}
+
+.mode-switch {
+    margin: 0 10px;
 }

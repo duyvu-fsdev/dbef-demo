@@ -1,16 +1,42 @@
+.banner-container {
+    padding-top: var(--header-height);
+}
+
 .slider {
     background-color: #212121;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 50%;
     position: relative; /* If you want text inside of it */
-    overflow-x: hidden;
+    overflow: hidden;
     // animation: modalIn ease 1s;
+    .banner-btn {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        z-index: 20;
+        color: currentColor;
+    }
+
+    .banner-img,
+    .banner-text {
+        // position: absolute;
+        // top: 0px;
+        // left: 0px;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+    }
+    .banner-text {
+    }
 }
 
 .left-arrow {
     position: absolute;
-    top: 20%;
-    transform: translate(0, -50%);
+    top: 25%;
+    transform: translate(0, -75%);
     left: 32px;
     font-size: 45px;
     color: #fff;
@@ -21,8 +47,8 @@
 
 .right-arrow {
     position: absolute;
-    top: 20%;
-    transform: translate(0, -50%);
+    top: 25%;
+    transform: translate(0, -75%);
     right: 32px;
     font-size: 45px;
     color: #fff;
@@ -41,21 +67,7 @@
     cursor: pointer;
 }
 
-.banner-btn {
-    padding: 0;
-    z-index: 20;
-    color: currentColor;
-}
-
-.banner-img {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-}
-
-.border {
+x .border {
     box-shadow: inset 0px 0px 50px 5px #212121;
     position: absolute;
     width: 100%;

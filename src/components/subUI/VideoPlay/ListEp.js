@@ -1,12 +1,13 @@
 import classNames from 'classnames/bind';
-import { memo } from 'react';
-import Button from '../Button/Button';
+import { useThemMui } from '_/contexts/ThemeMuiContext';
 
+import Button from '../Button/Button';
 import styles from './VideoPlay.module.scss';
 
 const cx = classNames.bind(styles);
 
 function ListEp(props) {
+    const { color } = useThemMui();
     const { data, slug, onEpChange, id } = props;
     const handleEpchange = (newEp, epShow, id) => {
         if (onEpChange) {
@@ -16,6 +17,9 @@ function ListEp(props) {
 
     return (
         <Button
+            style={{
+                '--background-color': color,
+            }}
             onClick={() => handleEpchange(id + 1, data.name, id)}
             to={`/xem-phim&name=${slug}&id=${id}&ep=${data.name}`}
             className={cx('e-num')}
@@ -25,4 +29,4 @@ function ListEp(props) {
     );
 }
 
-export default memo(ListEp);
+export default ListEp;

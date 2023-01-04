@@ -39,15 +39,15 @@ function Sidebar() {
     return (
         <aside className={cx('wrapper')}>
             <div className={cx('container')}>
-                <Box sx={{ width: { 0: '40px', 1600: '212px' } }} className={cx('content')}>
+                <Box sx={{ width: { 0: '40px', 1280: '212px' } }}>
                     <div className={cx('sidebar-block')}>
                         <Button text className={cx('sidebar-btn')} to={routes.home}>
                             <Tooltip title="Home" arrow placement="right-start">
-                                <Box sx={{ display: { 0: 'flex', 1600: 'none' } }}>
+                                <Box sx={{ display: { 0: 'flex', 1280: 'none' } }}>
                                     <HomeIcon className={cx('icon')} />
                                 </Box>
                             </Tooltip>
-                            <Box sx={{ display: { 0: 'none', 1600: 'flex' } }}>
+                            <Box sx={{ display: { 0: 'none', 1280: 'flex' } }}>
                                 <HomeIcon className={cx('icon')} />
                                 <Box sx={{ marginLeft: '10px' }}> Home</Box>
                             </Box>
@@ -55,11 +55,11 @@ function Sidebar() {
 
                         <Button text className={cx('sidebar-btn')} to={routes.search}>
                             <Tooltip title="Search" arrow placement="right-start">
-                                <Box sx={{ display: { 0: 'flex', 1600: 'none' } }}>
+                                <Box sx={{ display: { 0: 'flex', 1280: 'none' } }}>
                                     <SearchIcon className={cx('icon')} />
                                 </Box>
                             </Tooltip>
-                            <Box sx={{ display: { 0: 'none', 1600: 'flex' } }}>
+                            <Box sx={{ display: { 0: 'none', 1280: 'flex' } }}>
                                 <SearchIcon className={cx('icon')} />
                                 <Box sx={{ marginLeft: '10px' }}>Search</Box>
                             </Box>
@@ -68,12 +68,12 @@ function Sidebar() {
 
                     {!(currentUser !== null) && (
                         <>
-                            <Box sx={{ display: { 0: 'none', 1600: 'flex' } }} className={cx('login-btn')}>
+                            <Box sx={{ display: { 0: 'none', 1280: 'flex' } }} className={cx('login-btn')}>
                                 <LoginBtn outline>
                                     <Box sx={{ display: 'block' }}>Log in</Box>
                                 </LoginBtn>
                             </Box>
-                            <Box sx={{ display: { 0: 'flex', 1600: 'none' } }} className={cx('login-btn')}>
+                            <Box sx={{ display: { 0: 'flex', 1280: 'none' } }} className={cx('login-btn')}>
                                 <Tooltip title="log in" arrow placement="right-start">
                                     <div>
                                         <LoginBtn outline>
@@ -89,11 +89,11 @@ function Sidebar() {
                             <>
                                 <Button to="/watchLater" text className={cx('sidebar-btn')}>
                                     <Tooltip title="Watch later" arrow placement="right-start">
-                                        <Box sx={{ display: { 0: 'flex', 1600: 'none' } }}>
+                                        <Box sx={{ display: { 0: 'flex', 1280: 'none' } }}>
                                             <AccessTimeIcon className={cx('icon')} />
                                         </Box>
                                     </Tooltip>
-                                    <Box sx={{ display: { 0: 'none', 1600: 'flex' } }}>
+                                    <Box sx={{ display: { 0: 'none', 1280: 'flex' } }}>
                                         <AccessTimeIcon className={cx('icon')} />
                                         <Box sx={{ marginLeft: '10px' }}> Watch later</Box>
                                     </Box>
@@ -152,10 +152,10 @@ function Sidebar() {
                                     >
                                         <div>
                                             <Button text className={cx('sidebar-btn')}>
-                                                <Box sx={{ display: { 0: 'flex', 1600: 'none' } }}>
+                                                <Box sx={{ display: { 0: 'flex', 1280: 'none' } }}>
                                                     <AccessTimeIcon className={cx('icon')} />
                                                 </Box>
-                                                <Box sx={{ display: { 0: 'none', 1600: 'flex' } }}>
+                                                <Box sx={{ display: { 0: 'none', 1280: 'flex' } }}>
                                                     <AccessTimeIcon className={cx('icon')} />
                                                     <Box sx={{ marginLeft: '10px' }}> Watch later</Box>
                                                 </Box>

@@ -26,7 +26,7 @@
         border-radius: 24px;
         display: block;
         // background: rgba(240, 234, 234, 0.2);
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: #ffffffb3;
         border: 1px solid transparent;
         font-size: 1.4rem;
         overflow: hidden;
@@ -84,14 +84,19 @@
 }
 
 .search-result-container {
-    padding-bottom: 8px;
     min-width: 250px;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 0;
 }
 
 .search-result-title {
-    opacity: 0.6;
     padding: 8px 16px 8px 16px;
-    border-bottom: 1px solid #333;
+    z-index: 1;
+    border-radius: 6px 6px 0 0;
+    color: #a1a1a1;
+    border-bottom: 1px solid #a1a1a1;
+    width: 100%;
 }
 
 // Search Items
@@ -108,26 +113,11 @@
         background: rgba(255, 255, 255, 0.08);
     }
 }
-// .movie-img-block {
-//     width: 50px;
-// }
-.movie-img {
+.movie-img-block {
     width: 50px;
 }
-
-.content {
-    display: block;
-    margin-left: 12px;
-    text-align: left;
-
-    .movie-name {
-        flex: 1;
-        font-size: 1.4rem;
-    }
-    .movie-origin-name {
-        flex: 1;
-        font-size: 1.2rem;
-    }
+.movie-img {
+    width: 50px;
 }
 
 .overlay {

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { MyTextField } from '_/components/CustomComponents/CustomComponents';
 import { Button } from '_/components/subUI';
 import { useAuth } from '_/contexts/AuthContext';
-import { changeFormSlice, showModalSlice, showNotifSlice } from '_/Hook/redux/slices';
+import { changeFormSlice, showLoadingSlice, showModalSlice, showNotifSlice } from '_/Hook/redux/slices';
 import styles from './Auth.modelu.scss';
 import addDocument from './firebase/addDocument';
 
@@ -49,6 +49,11 @@ function Register() {
     };
 
     const handleSubmit = async (e) => {
+        dispatch(
+            showLoadingSlice.actions.showLoading({
+                state: true,
+            }),
+        );
         const fullName = `${firstName.split(' ')} ${lastName.split(' ')[0]}`.replace(/ + /g, ' ');
         e.preventDefault();
         if (password === confirmPassword) {
@@ -67,7 +72,11 @@ function Register() {
                             state: false,
                         }),
                     );
-
+                    dispatch(
+                        showLoadingSlice.actions.showLoading({
+                            state: false,
+                        }),
+                    );
                     handleShowSnackbar({ type: 'success', open: true, message: 'Sign up success & auto log in !' });
                     handleHideSnackbar();
 
@@ -81,6 +90,11 @@ function Register() {
                     }
                 });
         } else {
+            dispatch(
+                showLoadingSlice.actions.showLoading({
+                    state: false,
+                }),
+            );
             handleShowSnackbar({
                 type: 'warning',
                 open: true,
@@ -91,6 +105,11 @@ function Register() {
     };
 
     const handleAuthFbLogin = () => {
+        dispatch(
+            showLoadingSlice.actions.showLoading({
+                state: true,
+            }),
+        );
         signInWithFaceBook()
             .then((user) => {
                 dispatch(
@@ -103,17 +122,29 @@ function Register() {
                         state: false,
                     }),
                 );
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 handleShowSnackbar({ type: 'success', open: true, message: 'Sign up success & auto log in !' });
                 handleHideSnackbar();
                 addDocument(user);
             })
-            .catch((e) => console.log(e.message));
+            .catch((e) => {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
+                console.log(e.message);
+            });
     };
 
     const handleChangeToLoginForm = () => {
         dispatch(
             changeFormSlice.actions.changeForm({
-                state: { login: true, forgot: false, reg: false, edit: false },
+                state: { login: true },
             }),
         );
     };

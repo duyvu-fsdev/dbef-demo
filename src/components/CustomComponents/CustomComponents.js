@@ -55,14 +55,14 @@ export const MyAppBar = ({ children }) => {
 
         let bgcl;
         if (theme.palette.mode === 'dark') bgcl = 'black';
-        else bgcl = '#54c9ff';
+        else bgcl = '#f1f1f1';
 
         return cloneElement(children, {
             // set style
             style: {
-                backgroundColor: trigger ? bgcl : 'transparent',
-                transition: trigger ? '0.5s' : '0.8s',
-                boxShadow: 'none',
+                backgroundColor: trigger ? bgcl : theme.palette.background.default,
+                transition: '0.5s',
+                boxShadow: trigger ? '' : 'none',
                 backgroundImage: 'none',
                 display: 'block',
             },
@@ -79,3 +79,35 @@ export const MyAppBar = ({ children }) => {
         </ScrollToChangeStyle>
     );
 };
+
+// Tooltip - click
+// const [open, setOpen] = useState(false);
+
+// const handleTooltipClose = () => {
+//     setOpen(false);
+// };
+
+// const handleTooltipOpen = () => {
+//     setOpen(true);
+// };
+
+// <ClickAwayListener onClickAway={handleTooltipClose}>
+// <Tooltip
+//     className={cx('tooltip')}
+//     title={<UserPopper />}
+//     arrow
+//     TransitionComponent={Zoom}
+//     PopperProps={{
+//         disablePortal: true,
+//     }}
+//     onClose={handleTooltipClose}
+//     open={open}
+//     disableFocusListener
+//     disableHoverListener
+//     disableTouchListener
+// >
+//     <div onClick={handleTooltipOpen} className={cx('user-box')}>
+//         <UserAvatar />
+//     </div>
+// </Tooltip>
+// </ClickAwayListener>

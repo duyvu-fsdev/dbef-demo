@@ -38,7 +38,6 @@ function Action(props) {
     const [dataDoc, setDataDoc] = useState();
 
     const { data, is18, hasUser } = props;
-
     let styles = { pointerEvents: 'fill', opacity: 1 };
 
     if (is18) {
@@ -96,7 +95,7 @@ function Action(props) {
 
     return (
         <>
-            <Box sx={{ width: { 0: '100%', 480: '480px', 760: '320px' }, margin: '0 auto', ...styles }}>
+            <Box sx={{ width: { 0: '100%', 480: '480px', 720: '320px' }, margin: '0 auto', ...styles }}>
                 <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={1} className={cx('action-warrper')}>
                     <Box gridColumn="span 4">
                         <Button text to={`/xem-phim&name=${slug}&id=0&ep=1`} className={cx('action-btn')}>

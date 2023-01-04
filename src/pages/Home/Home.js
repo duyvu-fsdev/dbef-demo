@@ -21,7 +21,6 @@ function Home() {
             .then(unwrapResult)
             .then((result) => {
                 const data = result.items;
-
                 const value = data.map((data) => {
                     const { name, origin_name, poster_url, slug, thumb_url } = data;
                     const posterUrl = `${result.pathImage}${poster_url}`;

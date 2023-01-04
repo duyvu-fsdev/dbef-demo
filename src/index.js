@@ -1,6 +1,8 @@
 import { CssBaseline } from '@mui/material';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+
 import App from './App';
 import GlobalStyles from './assets/GlobalStyles';
 import AuthContextProvider from './contexts/AuthContext';
@@ -11,7 +13,7 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    // <React.StrictMode>
+    //   <StrictMode>
     <ThemeMuiContextProvider>
         <CssBaseline />
         <GlobalStyles>
@@ -24,7 +26,7 @@ root.render(
             </Provider>
         </GlobalStyles>
     </ThemeMuiContextProvider>,
-    // {/* </React.StrictMode> */}
+    //  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

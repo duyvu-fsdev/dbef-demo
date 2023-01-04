@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { MyTextField } from '_/components/CustomComponents/CustomComponents';
 import { Button } from '_/components/subUI';
 import { useAuth } from '_/contexts/AuthContext';
-import { changeFormSlice, showNotifSlice } from '_/Hook/redux/slices';
+import { changeFormSlice, showLoadingSlice, showNotifSlice } from '_/Hook/redux/slices';
 import styles from './Auth.modelu.scss';
 
 const cx = classNames.bind(styles);
@@ -42,10 +42,20 @@ function ForgotPassword() {
     };
 
     const handleSubmit = async (e) => {
+        dispatch(
+            showLoadingSlice.actions.showLoading({
+                state: true,
+            }),
+        );
         e.preventDefault();
 
         forgotPassword(email)
             .then((res) => {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 handleShowSnackbar({
                     styleOveride: { color: '#f44336' },
                     type: 'error',
@@ -55,6 +65,11 @@ function ForgotPassword() {
                 handleHideSnackbar();
             })
             .catch((error) => {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 setEmail('');
                 handleShowSnackbar({
                     styleOveride: { color: '#f44336' },
@@ -71,14 +86,14 @@ function ForgotPassword() {
     const handleChangeToRegisterForm = () => {
         dispatch(
             changeFormSlice.actions.changeForm({
-                state: { login: false, forgot: false, reg: true, edit: false },
+                state: { reg: true },
             }),
         );
     };
     const handleChangeToLoginForm = () => {
         dispatch(
             changeFormSlice.actions.changeForm({
-                state: { login: true, logout: false, reg: false, edit: false },
+                state: { login: true },
             }),
         );
     };

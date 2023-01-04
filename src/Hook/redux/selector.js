@@ -1,7 +1,3 @@
-function checkLog(state) {
-    return state.checklog.state;
-}
-
 function changeForm(state) {
     return state.changeForm.state;
 }
@@ -13,6 +9,10 @@ function showModal(state) {
 function showNotif(state) {
     return state.showNotif.state;
 }
+function showLoading(state) {
+    return state.showLoading.state;
+}
+
 function setOverlay(state) {
     return state.overlay.state;
 }
@@ -21,4 +21,4 @@ function movies(state) {
     return state.movies.current;
 }
 
-export const selector = { movies, checkLog, setOverlay, changeForm, showModal, showNotif };
+export const selector = { movies, setOverlay, changeForm, showModal, showNotif, showLoading };

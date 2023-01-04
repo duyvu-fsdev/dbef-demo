@@ -1,7 +1,7 @@
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { Tooltip } from '@mui/material';
+import { Tooltip, Typography } from '@mui/material';
 import classNames from 'classnames/bind';
 import { serverTimestamp } from 'firebase/firestore';
 import { useEffect } from 'react';
@@ -23,6 +23,7 @@ function ContentItem({ data, isWatchLater }) {
 
     const { name, originName, slug, thumbUrl, posterUrl } = data;
     const dataDoc = { name, originName, slug, thumbUrl, uid: [uid], posterUrl, createdAt: serverTimestamp() };
+
     return (
         <div className={cx('item')}>
             <div className={cx('item-container')}>
@@ -34,8 +35,11 @@ function ContentItem({ data, isWatchLater }) {
                     </div>
                     <div className={cx('info')}>
                         <div className={cx('title')}>
-                            <h4> {name} </h4>
-                            <h5> ({originName}) </h5>
+                            <Typography variant="h5" fontWeight={700}>
+                                {' '}
+                                {name}
+                            </Typography>
+                            <Typography variant="h6">{originName}</Typography>
                         </div>
                     </div>
                 </Link>
@@ -43,7 +47,7 @@ function ContentItem({ data, isWatchLater }) {
                     <Tooltip arrow title="Play">
                         <div className={cx('btn')}>
                             <Button to={`/xem-phim&name=${slug}&id=0&ep=1`} text>
-                                <PlayArrowIcon />
+                                <PlayArrowIcon sx={{ fontSize: '2rem' }} />
                             </Button>
                         </div>
                     </Tooltip>
@@ -53,10 +57,10 @@ function ContentItem({ data, isWatchLater }) {
                                 <DeleteDocumentBtn
                                     collectionName={'watch_later_list'}
                                     id={slug}
-                                    className={cx('del-btn')}
+                                    className={cx('action-btn')}
                                     uid={uid}
                                 >
-                                    <RemoveIcon />
+                                    <RemoveIcon sx={{ fontSize: '2rem' }} />
                                 </DeleteDocumentBtn>
                             </div>
                         </Tooltip>
@@ -67,10 +71,10 @@ function ContentItem({ data, isWatchLater }) {
                                     dataDoc={dataDoc}
                                     collectionName={'watch_later_list'}
                                     id={slug}
-                                    className={cx('del-btn')}
+                                    className={cx('action-btn')}
                                     uid={uid}
                                 >
-                                    <BookmarkAddIcon />
+                                    <BookmarkAddIcon sx={{ fontSize: '2rem' }} />
                                 </AddDocumentBtn>
                             </div>
                         </Tooltip>
@@ -94,8 +98,8 @@ function ContentItem({ data, isWatchLater }) {
                             }
                         >
                             <div className={cx('btn')}>
-                                <Button disable text className={cx('del-btn')}>
-                                    <BookmarkAddIcon />
+                                <Button disable text className={cx('action-btn')}>
+                                    <BookmarkAddIcon sx={{ fontSize: '2rem' }} />
                                 </Button>
                             </div>
                         </MyTooltip>

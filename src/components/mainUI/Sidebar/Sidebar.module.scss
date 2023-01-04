@@ -5,6 +5,7 @@
     min-height: 0;
     position: relative;
     z-index: 4;
+    padding-top: 64px;
 
     .container {
         z-index: 4;
@@ -14,15 +15,8 @@
         user-select: none;
         width: 100%;
         justify-content: right;
+        padding: 10px;
     }
-}
-
-.content {
-    padding: 0;
-    margin-left: 12px;
-
-    width: var(--width);
-    float: right;
 }
 
 ///
@@ -92,7 +86,7 @@
     left: 0;
     bottom: 0;
     height: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.363);
+    border-top: 1px solid currentColor;
 
     .icons {
         margin: 6px auto;
@@ -103,8 +97,8 @@
     .icon {
         padding: 0;
         margin: 0;
-        // color: #fff;
-        fill: #fff;
+        color: currentColor;
+        fill: currentColor;
         + .icon {
             margin-left: 12px;
         }

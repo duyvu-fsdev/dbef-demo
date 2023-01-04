@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { MyTextField } from '_/components/CustomComponents/CustomComponents';
 import { Button } from '_/components/subUI';
-import { showModalSlice } from '_/Hook/redux/slices';
+import { showLoadingSlice, showModalSlice, showNotifSlice } from '_/Hook/redux/slices';
 import { useFireStore } from '../../contexts/FireStoreContext';
 import removeVietnameseTones from '../removeVietnameseTones';
 import styles from './Auth.modelu.scss';
@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 
 function EditInfoUser() {
     const dispatch = useDispatch();
-    const [gender, setGender] = useState('female');
+    const [gender, setGender] = useState('Female');
     const [birthYear, setbirthYear] = useState('');
     const [phoneNumber, setMobileNumber] = useState('');
     const mounted = useRef(false);
@@ -29,16 +29,63 @@ function EditInfoUser() {
         };
     }, []);
 
+    const handleShowSnackbar = (state) => {
+        dispatch(
+            showNotifSlice.actions.showNotif({
+                state: state,
+            }),
+        );
+    };
+
+    const handleHideSnackbar = () => {
+        setTimeout(function () {
+            dispatch(
+                showNotifSlice.actions.showNotif({
+                    state: { open: false, message: '', type: '' },
+                }),
+            );
+        }, 2000);
+    };
+
     const handleSubmit = (e) => {
+        dispatch(
+            showLoadingSlice.actions.showLoading({
+                state: true,
+            }),
+        );
+
+        const age = new Date().getFullYear() - Number(birthYear);
+        if (age > 110) {
+            dispatch(
+                showLoadingSlice.actions.showLoading({
+                    state: false,
+                }),
+            );
+            handleShowSnackbar({
+                type: 'warning',
+                open: true,
+                message: 'Invalid birthYear !',
+            });
+            handleHideSnackbar();
+            return;
+        }
+
         e.preventDefault();
         const { id } = userData;
         const ref = doc(db, 'users', id);
-        const updateDataDoc = {
-            birthYear: birthYear ? Number(birthYear) : 0,
-            phoneNumber: Number(phoneNumber),
-            gender,
-        };
+        const updateDataDoc = (() => {
+            if (!birthYear && !phoneNumber) return { gender };
+            if (!birthYear && phoneNumber) return { gender, phoneNumber };
+            if (birthYear && !phoneNumber) return { gender, birthYear };
+            return { birthYear, phoneNumber, gender };
+        })();
+
         updateDoc(ref, updateDataDoc).then(() => {
+            dispatch(
+                showLoadingSlice.actions.showLoading({
+                    state: false,
+                }),
+            );
             dispatch(
                 showModalSlice.actions.showModal({
                     state: false,
@@ -102,9 +149,9 @@ function EditInfoUser() {
                             setGender(value);
                         }}
                     >
-                        <FormControlLabel value="female" control={<Radio />} label="Female" />
-                        <FormControlLabel value="male" control={<Radio />} label="Male" />
-                        <FormControlLabel value="other" control={<Radio />} label="Other" />
+                        <FormControlLabel value="Female" control={<Radio />} label="Female" />
+                        <FormControlLabel value="Male" control={<Radio />} label="Male" />
+                        <FormControlLabel value="Other" control={<Radio />} label="Other" />
                     </RadioGroup>
 
                     <Button primary className={cx('auth-btn')} type="submit" onClick={handleSubmit}>

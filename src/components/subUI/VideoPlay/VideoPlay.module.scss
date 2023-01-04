@@ -1,12 +1,11 @@
 .container {
-    // max-width: 1800px;
+    // max-width: 1920px;
     width: 100%;
 }
 
 .video-container {
     display: block;
     max-width: 100%;
-    // max-height: 100%;
 }
 
 .video-inner {
@@ -42,7 +41,8 @@
     // min-width: 370px;
 
     padding: 10px;
-    border: 2px solid #fff;
+    border: 2px solid currentColor;
+    border-radius: 6px;
 
     .title,
     .eps {
@@ -51,7 +51,7 @@
     }
 
     .title {
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid currentColor;
         display: block; /* Fallback trong trường hợp trình duyệt không hỗ trợ display dạng box */
         display: -webkit-box;
         font-size: 2.5rem;
@@ -80,12 +80,10 @@
 
     .e-num {
         display: inline-grid;
-
-        border: 1px solid #fff;
+        border: 1px solid currentColor;
         padding: 0;
-        color: #fff;
+        color: inherit;
         min-width: 40px;
-        background-color: var(--background-color);
         margin: 1px;
         font-weight: 400;
         -webkit-tap-highlight-color: red;

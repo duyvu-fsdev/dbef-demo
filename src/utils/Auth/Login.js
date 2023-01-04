@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Button } from '_/components/subUI';
-import { changeFormSlice, showModalSlice, showNotifSlice } from '_/Hook/redux/slices';
+import { changeFormSlice, showLoadingSlice, showModalSlice, showNotifSlice } from '_/Hook/redux/slices';
 import { useAuth } from '_/contexts/AuthContext';
 import styles from './Auth.modelu.scss';
 import addDocument from './firebase/addDocument';
@@ -45,6 +45,11 @@ function Login() {
     };
 
     const handleSubmit = async (e) => {
+        dispatch(
+            showLoadingSlice.actions.showLoading({
+                state: true,
+            }),
+        );
         e.preventDefault();
         login(email, password)
             // eslint-disable-next-line no-restricted-globals
@@ -60,16 +65,24 @@ function Login() {
                         state: false,
                     }),
                 );
-
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 handleShowSnackbar({
                     type: 'success',
                     open: true,
                     message: 'Log in success !',
                 });
-
                 handleHideSnackbar();
             })
             .catch((error) => {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 if (error.message.includes('wrong-password')) {
                     handleShowSnackbar({
                         styleOveride: { color: '#f44336' },
@@ -101,20 +114,23 @@ function Login() {
                     });
                     handleHideSnackbar();
                 } else {
-                    dispatch(
-                        handleShowSnackbar({
-                            styleOveride: { color: '#f44336' },
-                            type: 'error',
-                            open: true,
-                            message: 'Unspecified error !',
-                        }),
-                    );
+                    handleShowSnackbar({
+                        styleOveride: { color: '#f44336' },
+                        type: 'error',
+                        open: true,
+                        message: 'Unspecified error !',
+                    });
                     handleHideSnackbar();
                 }
             });
     };
 
     const handleAuthFbLogin = () => {
+        dispatch(
+            showLoadingSlice.actions.showLoading({
+                state: true,
+            }),
+        );
         signInWithFaceBook()
             .then((user) => {
                 dispatch(
@@ -128,6 +144,11 @@ function Login() {
                     }),
                 );
 
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
                 handleShowSnackbar({
                     type: 'success',
                     open: true,
@@ -137,13 +158,21 @@ function Login() {
                 handleHideSnackbar();
                 addDocument(user);
             })
-            .catch((e) => console.log(e.message));
+            .catch((e) => {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
+                console.log(e.message);
+            });
     };
 
     const handleChangeToRegisterForm = () => {
         dispatch(
             changeFormSlice.actions.changeForm({
-                state: { login: false, forgot: false, reg: true, edit: false },
+                // state: { login: false, forgot: false, reg: true, edit: false },
+                state: { reg: true },
             }),
         );
     };
@@ -151,7 +180,8 @@ function Login() {
     const handleChangeToFogotPasswordForm = () => {
         dispatch(
             changeFormSlice.actions.changeForm({
-                state: { login: false, forgot: true, reg: false, edit: false },
+                // state: { login: false, forgot: true, reg: false, edit: false },
+                state: { forgot: true },
             }),
         );
     };

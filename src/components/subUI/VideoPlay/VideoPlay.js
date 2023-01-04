@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import classNames from 'classnames/bind';
-import { memo } from 'react';
 
 import ListEp from './ListEp';
 import styles from './VideoPlay.module.scss';
@@ -51,4 +50,4 @@ function VideoPlay(data) {
     );
 }
 
-export default memo(VideoPlay);
+export default VideoPlay;

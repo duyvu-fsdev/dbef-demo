@@ -20,6 +20,8 @@ function addDocument(user, fullName) {
             birthYear: null,
         };
 
+        console.log({ details, user, dataDoc, dbRef });
+
         addDoc(dbRef, dataDoc)
             .then((docRef) => {
                 const ref = doc(db, 'users', docRef.id);

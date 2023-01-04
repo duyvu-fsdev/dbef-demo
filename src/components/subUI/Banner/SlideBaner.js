@@ -35,8 +35,8 @@ const SlideBaner = ({ content }) => {
                     }
                 }
             };
-            const { url, slug } = imgBanner();
-            return dataReturn.push({ url, slug });
+            const { url, slug, name } = imgBanner();
+            return dataReturn.push({ url, slug, name });
         });
 
         setUseData(dataReturn.slice(0, totalItemSlide));
@@ -100,21 +100,22 @@ const SlideBaner = ({ content }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [preIndex, index, a]);
 
-    let slug, url;
+    let slug, url, name;
 
     if (useData.length - 1 > 0) {
         slug = useData[index].slug;
         url = useData[index].url;
+        name = useData[index].name;
     }
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('banner-container')}>
-                <SlideItem slug={slug} url={url} />
-                <Box sx={{ display: { 0: 'none', 760: 'block' } }} onClick={goToPrevious} className={cx('left-arrow')}>
+                <SlideItem slug={slug} url={url} name={name} />
+                <Box sx={{ display: { 0: 'none', 720: 'block' } }} onClick={goToPrevious} className={cx('left-arrow')}>
                     ❰
                 </Box>
-                <Box sx={{ display: { 0: 'none', 760: 'block' } }} onClick={goToNext} className={cx('right-arrow')}>
+                <Box sx={{ display: { 0: 'none', 720: 'block' } }} onClick={goToNext} className={cx('right-arrow')}>
                     ❱
                 </Box>
 

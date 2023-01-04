@@ -1,15 +1,14 @@
-import classNames from 'classnames/bind';
-import { memo, useEffect, useState } from 'react';
-
 import { Tooltip } from '@mui/material';
+import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
+
 import { icon, SearchIcon } from '_/assets/Icon';
+import AllMoviesDataContextProvider, { useAllData } from '_/contexts/AllMoviesDataContext';
+import DataServerContextProvider, { useDataServer } from '_/contexts/DataServerContext';
 import useDebounce from '_/Hook/useDebounce';
 import { Wrapper as PopperWrapper } from '_/Popper/';
-import { useDataServer } from '_/contexts/DataServerContext';
 import removeVietnameseTones from '_/utils/removeVietnameseTones';
 import styles from './SearchMovie.module.scss';
-// import SearchMovieItem from './SearchMovieItem';
-import { useFireStore } from '_/contexts/FireStoreContext';
 import SearchMovieItems from './SearchMovieItems';
 
 const cx = classNames.bind(styles);
@@ -21,7 +20,7 @@ function SearchMovie() {
 
     const debounce = useDebounce(searchValue, 800);
 
-    const { allMoviesData } = useFireStore();
+    const { allMoviesData } = useAllData();
 
     useEffect(() => {
         if (!debounce.trim()) {
@@ -53,46 +52,50 @@ function SearchMovie() {
             );
         });
     };
-    // if (searchValue.length <= 0) return;
 
     return (
-        <div className={cx('wrapper')}>
-            <div className={cx('search')}>
-                <Tooltip
-                    open={searchValue?.length > 0 && showResult && searchResult?.length > 0}
-                    title={
-                        <>
-                            {searchValue?.length > 0 && showResult && searchResult?.length > 0 && (
-                                <PopperWrapper className={cx('search-result-container')}>
-                                    <h4 className={cx('search-result-title')}>Movie</h4>
-                                    {renderContent()}
-                                </PopperWrapper>
-                            )}
-                        </>
-                    }
-                >
-                    <div className={cx('search-container')}>
-                        <div className={cx('search-content')}>
-                            <button className={cx('search-btn')}>
-                                <SearchIcon />
-                            </button>
-                            <input
-                                value={searchValue}
-                                placeholder="Enter movies name..."
-                                onChange={handleChange}
-                                spellCheck={false}
-                                onFocus={handleFocus}
-                            />
-                            <div className={cx('icon')} onClick={handleClear}>
-                                {!!searchValue && <img className={cx('clear-btn')} src={icon.clear} alt="" />}
-                                {/* {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />} */}
+        <DataServerContextProvider>
+            <AllMoviesDataContextProvider>
+                <div className={cx('wrapper')}>
+                    <div className={cx('search')}>
+                        <Tooltip
+                            open={searchValue?.length > 0 && showResult && searchResult?.length > 0}
+                            title={
+                                <>
+                                    {searchValue?.length > 0 && showResult && searchResult?.length > 0 && (
+                                        <PopperWrapper className={cx('search-result-container')}>
+                                            <h4 className={cx('search-result-title')}>Movie</h4>
+                                            {renderContent()}
+                                        </PopperWrapper>
+                                    )}
+                                </>
+                            }
+                        >
+                            <div className={cx('search-container')}>
+                                <div className={cx('search-content')}>
+                                    <button className={cx('search-btn')}>
+                                        <SearchIcon />
+                                    </button>
+                                    <input
+                                        value={searchValue}
+                                        placeholder="Enter movies name..."
+                                        onChange={handleChange}
+                                        spellCheck={false}
+                                        onFocus={handleFocus}
+                                        autoFocus
+                                    />
+                                    <div className={cx('icon')} onClick={handleClear}>
+                                        {!!searchValue && <img className={cx('clear-btn')} src={icon.clear} alt="" />}
+                                        {/* {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />} */}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </Tooltip>
                     </div>
-                </Tooltip>
-            </div>
-        </div>
+                </div>
+            </AllMoviesDataContextProvider>
+        </DataServerContextProvider>
     );
 }
 
-export default memo(SearchMovie);
+export default SearchMovie;

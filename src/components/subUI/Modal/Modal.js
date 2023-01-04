@@ -1,5 +1,4 @@
 import classNames from 'classnames/bind';
-import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { icon } from '_/assets/Icon';
 
@@ -19,7 +18,6 @@ function Modal() {
     const dispatch = useDispatch();
     const changeForm = useSelector(selector.changeForm);
     const { login, forgot, reg, edit } = changeForm;
-
     const handleHideModal = () => {
         dispatch(
             showModalSlice.actions.showModal({
@@ -48,4 +46,4 @@ function Modal() {
     );
 }
 
-export default memo(Modal);
+export default Modal;

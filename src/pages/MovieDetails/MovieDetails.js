@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { unwrapResult } from '@reduxjs/toolkit';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
@@ -16,11 +16,28 @@ import styles from './MovieDetails.module.scss';
 const cx = classNames.bind(styles);
 
 function MovieDetails() {
-    const { userData } = useFireStore();
     const dispatch = useDispatch();
+    const { userData } = useFireStore();
     const [data, setData] = useState({});
     const [is18, setIs18] = useState(false);
 
+    const {
+        slug,
+        name,
+        episodeTotal,
+        episodeCurrent,
+        time,
+        quality,
+        originName,
+        category,
+        country,
+        actor,
+        director,
+        content,
+        thumbUrl,
+        posterUrl,
+        year,
+    } = data;
     useEffect(() => {
         const slug = getAllUrlParams().name;
         dispatch(fetchMovies(slug))
@@ -70,34 +87,14 @@ function MovieDetails() {
                     content: content.replace(/<strong>|<\/strong>|<p>|<\/p>|\\n|&nbsp;|<br>|\\/g, ' '),
                 });
             });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [userData, getAllUrlParams()]);
 
-    const {
-        slug,
-        name,
-        episodeTotal,
-        episodeCurrent,
-        time,
-        quality,
-        originName,
-        category,
-        country,
-        actor,
-        director,
-        content,
-        thumbUrl,
-        posterUrl,
-        year,
-    } = data;
-
-    useEffect(() => {
-        category === undefined || category === []
+        category === undefined || !category.length
             ? setIs18(false)
             : category.includes(18)
             ? setIs18(true)
             : setIs18(false);
-    }, [category]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userData, category]);
 
     const positionRef = useRef({
         x: 0,
@@ -117,7 +114,7 @@ function MovieDetails() {
                     Log in
                 </LoginBtn>
             );
-        } else if (hasUser && (age < 18 || age === 2022)) {
+        } else if (hasUser && (age < 18 || new Date().getFullYear())) {
             msg = 'Has not updated age or is under 18 years old';
             btnRender = () => (
                 <Button to={'/profile'} primary scale className={cx('to-profile')}>
@@ -134,7 +131,7 @@ function MovieDetails() {
             }
         };
 
-        return (is18 && (age < 18 || age === 2022)) || (is18 && !hasUser) ? (
+        return (is18 && (age < 18 || age === new Date().getFullYear())) || (is18 && !hasUser) ? (
             <MyTooltip
                 placement="right"
                 arrow
@@ -163,18 +160,18 @@ function MovieDetails() {
                     <Box
                         ref={areaRef}
                         onMouseMove={handleMouseMove}
-                        sx={{ width: { 0: '100%', 480: '480px', 760: '320px' }, margin: '0 auto' }}
+                        sx={{ width: { 0: '100%', 480: '480px', 720: '320px' }, margin: '0 auto' }}
                         className={cx('image')}
                     >
                         <img className={cx('img')} src={thumbUrl} alt={name} />
                     </Box>
-                    <Action data={data} is18={is18} />
+                    <Action data={data} is18={is18} hasUser={hasUser} />
                 </Box>
             </MyTooltip>
         ) : (
             <>
                 <Box
-                    sx={{ width: { 0: '100%', 480: '480px', 760: '320px' }, margin: '0 auto' }}
+                    sx={{ width: { 0: '100%', 480: '480px', 720: '320px' }, margin: '0 auto' }}
                     className={cx('image')}
                 >
                     <img className={cx('img')} src={thumbUrl} alt={name} />
@@ -198,9 +195,9 @@ function MovieDetails() {
                                 sx={{
                                     gridColumn: {
                                         0: 'span 24',
-                                        760: 'span 12',
+                                        720: 'span 12',
                                         960: 'span 10',
-                                        1200: 'span 9',
+                                        1280: 'span 9',
                                         1360: 'span 8',
                                         1480: 'span 7',
                                         1660: 'span 6',
@@ -215,14 +212,14 @@ function MovieDetails() {
                                 sx={{
                                     gridColumn: {
                                         0: 'span 12',
-                                        760: 'span 12',
+                                        720: 'span 12',
                                         960: 'span 14',
-                                        1200: 'span 15',
+                                        1280: 'span 15',
                                         1360: 'span 16',
                                         1480: 'span 17',
                                         1660: 'span 18',
                                     },
-                                    display: { 0: 'none', 760: 'block' },
+                                    display: { 0: 'none', 720: 'block' },
                                 }}
                             >
                                 <Box className={cx('info')}>
@@ -248,8 +245,8 @@ function MovieDetails() {
 
                     <Box
                         sx={{
-                            display: { 0: 'block', 760: 'none' },
-                            width: { 0: '100%', 480: '480px', 760: '320px' },
+                            display: { 0: 'block', 720: 'none' },
+                            width: { 0: '100%', 480: '480px', 720: '320px' },
                             margin: '20px auto',
                             borderTop: '1px solid currentColor',
                             // borderBottom: '1px solid currentColor',
@@ -279,7 +276,31 @@ function MovieDetails() {
                         <div className={cx('desc-content')}>{content}</div>
                         <h3>Poster</h3>
                         <div className={cx('poster')}>
-                            <img className={cx('poster-img')} src={posterUrl} alt={name} />
+                            {posterUrl?.length === 0 ? (
+                                <Box
+                                    sx={{
+                                        paddingTop: '20%',
+                                        fontSize: '6rem',
+                                        textAlign: 'center',
+                                        backgroundColor: '#333',
+                                    }}
+                                    className={cx('poster-img')}
+                                >
+                                    <Typography
+                                        variant="h2"
+                                        sx={{
+                                            color: '#fff',
+                                            display: 'block',
+                                            overflowWrap: 'break-word',
+                                            marginTop: '10px',
+                                        }}
+                                    >
+                                        Poster is updating
+                                    </Typography>
+                                </Box>
+                            ) : (
+                                <img className={cx('poster-img')} src={posterUrl} alt={name} />
+                            )}
                         </div>
                     </div>
 

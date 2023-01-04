@@ -1,3 +1,4 @@
+import { SearchLayout } from '_/Layouts';
 import { Home, ListUpdate, MovieDetails, Play, Search, NotFoundPage, Profile, WatchLater } from '_/pages';
 
 const routes = {
@@ -13,7 +14,7 @@ const routes = {
 
 const PublicRoutes = [
     { path: routes.home, comp: Home },
-    { path: routes.search, comp: Search },
+    { path: routes.search, comp: Search, layout: SearchLayout },
     { path: routes.phim, comp: MovieDetails },
     { path: routes.play, comp: Play },
     { path: routes.list, comp: ListUpdate },

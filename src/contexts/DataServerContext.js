@@ -21,36 +21,6 @@ function DataServerContextProvider({ children }) {
     const [showResult, setShowResult] = useState(false);
 
     const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     if (!debounce.trim() && !showResult) {
-    //         return;
-    //     }
-
-    //     dispatch(fetchMovies())
-    //         .then(unwrapResult)
-    //         .then((result) => {
-    //             let dataReturn = { data: [], pathImage: result.pathImage };
-    //             for (let i = 1; i <= result?.pagination?.totalPages; i++) {
-    //                 dispatch(fetchMovies(i))
-    //                     .then(unwrapResult)
-    //                     .then((res) => res?.items)
-    //                     .then((res) => {
-    //                         res?.map((data) => {
-    //                             const { name, origin_name, thumb_url, slug } = data;
-    //                             return dataReturn.data.push({ name, origin_name, thumb_url, slug });
-    //                         });
-    //                     });
-    //             }
-
-    //             setFullData(dataReturn);
-    //         })
-
-    //         .catch((error) => console.log(error));
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [debounce, showResult]);
-
     const handleFocus = () => {
         setShowResult(true);
         dispatch(
@@ -92,6 +62,8 @@ function DataServerContextProvider({ children }) {
     };
 
     const value = { handleChange, handleClick, handleClear, handleFocus, searchValue, showResult };
+
+    console.log({ searchValue, showResult });
 
     return <DataServerContext.Provider value={value}>{children}</DataServerContext.Provider>;
 }

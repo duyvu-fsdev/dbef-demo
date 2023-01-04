@@ -1,14 +1,12 @@
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import LogoutIcon from '@mui/icons-material/Logout';
 import classNames from 'classnames/bind';
 import { signOut } from 'firebase/auth';
-
-import { Button } from '_/components/subUI';
-import { auth } from './firebase/firebaseConfig';
-
-import { faChevronCircleRight, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 
+import { Button } from '_/components/subUI';
 import styles from './Auth.modelu.scss';
+import { auth } from './firebase/firebaseConfig';
 
 const cx = classNames.bind(styles);
 
@@ -29,8 +27,8 @@ function Logout() {
         <Button
             text
             className={cx('user-popper-btn')}
-            leftIcon={<FontAwesomeIcon icon={faChevronCircleRight} />}
-            rightIcon={<FontAwesomeIcon icon={faRightFromBracket} />}
+            leftIcon={<ChevronRightIcon fontSize="large" />}
+            rightIcon={<LogoutIcon fontSize="large" />}
             onClick={handleLogout}
         >
             Log out

@@ -16,13 +16,6 @@
     font-weight: 700;
 }
 
-.sub-title {
-    font-size: 16px;
-    line-height: 19px;
-    margin: 12px;
-    text-align: left;
-}
-
 .portrait-container {
     position: relative;
     display: flex;
@@ -88,7 +81,6 @@
     margin: 0 8px;
     opacity: 0.87;
     letter-spacing: 0px;
-    max-width: calc((100% - 20px) * 0.24);
     text-overflow: ellipsis;
     display: inline-block;
     overflow: hidden;
@@ -97,7 +89,6 @@
 
 .msg {
     font-size: 14px;
-    max-width: 80%;
     text-overflow: ellipsis;
     display: inline-block;
     overflow: hidden;

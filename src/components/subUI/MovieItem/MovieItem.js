@@ -11,26 +11,17 @@ function MovieItem({ content = [], page, isWatchLater }) {
         <Box
             sx={{
                 display: 'grid',
-                gridTemplateColumns: {
-                    0: 'repeat(2, 1fr)',
-                    480: 'repeat(3, 1fr)',
-                    760: 'repeat(4, 1fr)',
-                    960: 'repeat(5, 1fr)',
-                    1200: 'repeat(6, 1fr)',
-                    1360: 'repeat(7, 1fr)',
-                    1480: 'repeat(8, 1fr)',
-                    1600: 'repeat(6, 1fr)',
-                },
-                minHeight: '280px',
+                gridTemplateColumns: 'repeat( auto-fill, minmax(175px, 1fr))',
+                // minHeight: '280px',
                 gridAutoRows: 0,
                 gridTemplateRows: '1fr',
                 overflowY: 'hidden',
                 columnGap: {
-                    0: '2px',
-                    760: '3px',
-                    960: '5px',
-                    1360: '6px',
-                    1600: '8px',
+                    0: '1px',
+                    720: '2px',
+                    960: '3px',
+                    1360: '4px',
+                    1600: '5px',
                 },
             }}
         >
@@ -40,25 +31,15 @@ function MovieItem({ content = [], page, isWatchLater }) {
         <Box
             sx={{
                 display: 'grid',
-                gridTemplateColumns: {
-                    0: 'repeat(2, 1fr)',
-                    480: 'repeat(3, 1fr)',
-                    760: 'repeat(4, 1fr)',
-                    960: 'repeat(5, 1fr)',
-                    1200: 'repeat(6, 1fr)',
-                    1360: 'repeat(7, 1fr)',
-                    1480: 'repeat(8, 1fr)',
-                    1600: 'repeat(6, 1fr)',
-                },
-                minHeight: '280px',
-
+                gridTemplateColumns: 'repeat( auto-fill, minmax(175px, 1fr))',
+                // minHeight: '280px',
                 gridAutoRows: 'auto',
                 gap: {
-                    0: '2px',
-                    760: '3px',
-                    960: '5px',
-                    1360: '6px',
-                    1600: '8px',
+                    0: '1px',
+                    720: '2px',
+                    960: '3px',
+                    1360: '4px',
+                    1600: '5px',
                 },
             }}
         >

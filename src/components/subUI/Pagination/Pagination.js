@@ -1,12 +1,13 @@
-import PropTypes from 'prop-types';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import styles from './Pagination.module.scss';
+import PropTypes from 'prop-types';
 import { memo, useState } from 'react';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import Button from '../Button/Button';
+
+import { useThemMui } from '_/contexts/ThemeMuiContext';
 import { getAllUrlParams } from '_/Hook/redux/slices';
+import Button from '../Button/Button';
+import styles from './Pagination.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,7 @@ Pagination.defaultProps = {
 };
 
 function Pagination(props) {
+    const { color } = useThemMui();
     const [pageInput, setPageInput] = useState(parseInt(getAllUrlParams().page));
     const { pagination, onPageChange } = props;
     // eslint-disable-next-line no-unused-vars
@@ -56,7 +58,12 @@ function Pagination(props) {
         setPageInput(+e.target.value);
     };
     return (
-        <div className={cx('wrapper')}>
+        <div
+            className={cx('wrapper')}
+            style={{
+                '--background-color': color,
+            }}
+        >
             <Button
                 className={cx('prev-button')}
                 style={{
@@ -67,7 +74,7 @@ function Pagination(props) {
                 disabled={currentPage <= 1}
                 onClick={() => handlePageChange(currentPage - 1)}
             >
-                <FontAwesomeIcon icon={faChevronLeft} />
+                <ChevronLeftIcon fontSize="large" />
             </Button>
 
             <div className={cx('current-page')}>
@@ -84,7 +91,7 @@ function Pagination(props) {
                 disabled={currentPage >= totalPages}
                 onClick={() => handlePageChange(currentPage + 1)}
             >
-                <FontAwesomeIcon icon={faChevronRight} />
+                <ChevronRightIcon fontSize="large" />
             </Button>
 
             <input
@@ -105,7 +112,7 @@ function Pagination(props) {
                 disabled={currentPage >= totalPages}
                 onClick={() => {
                     if (pageInput <= 0 || pageInput > totalPages || pageInput === '') {
-                        alert(`Vui lòng nhập số trang có giá trị từ 0 đến ${totalPages}`);
+                        alert(`Vui lòng nhập số trang có giá trị từ 1 đến ${totalPages}`);
                     } else handlePageChange(pageInput);
                 }}
             >

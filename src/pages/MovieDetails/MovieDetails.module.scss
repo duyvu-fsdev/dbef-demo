@@ -145,6 +145,7 @@
         position: relative; /* If you want text inside of it */
         overflow-x: hidden;
         .poster-img {
+            color: inherit;
             position: absolute;
             top: 0px;
             left: 0px;
