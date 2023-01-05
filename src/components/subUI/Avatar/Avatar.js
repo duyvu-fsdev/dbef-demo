@@ -1,13 +1,13 @@
 import { Avatar } from '@mui/material';
 import classNames from 'classnames/bind';
 
-import { useAuth } from '_/contexts/AuthContext';
+import { useFireStore } from '_/contexts/FireStoreContext';
 import styles from './Avatar.module.scss';
 
 const cx = classNames.bind(styles);
 
 function UserAvatar({ style, className }) {
-    const { currentUser } = useAuth();
+    const { userData } = useFireStore();
     function stringToColor(string) {
         let hash = 0;
         let i;
@@ -42,14 +42,19 @@ function UserAvatar({ style, className }) {
         [className]: className,
     });
 
-    if (!currentUser) return;
+    if (!userData) return;
 
-    return currentUser.photoURL ? (
-        <Avatar alt={currentUser.displayName} src={currentUser.photoURL} sx={style} className={cx('avatar')} />
+    return userData.photoURL || userData.avatarUrl ? (
+        <Avatar
+            alt={userData.displayName}
+            src={userData.avatarUrl ? userData.avatarUrl : userData.photoURL}
+            sx={style}
+            className={cx('avatar')}
+        />
     ) : (
         <Avatar
-            style={{ backgroundColor: stringToColor(currentUser.displayName) }}
-            {...stringAvatar(currentUser.displayName)}
+            style={{ backgroundColor: stringToColor(userData.displayName) }}
+            {...stringAvatar(userData.displayName)}
             sx={style}
             className={classes}
         />

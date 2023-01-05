@@ -31,7 +31,7 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async (params)
         const res = await moviesApi(params);
         return res;
     } catch (error) {
-        console.log('failed');
+        //console.log('failed');
     }
 });
 

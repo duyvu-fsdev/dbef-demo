@@ -78,7 +78,7 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
                             state: false,
                         }),
                     );
-                    console.log('Unsuccessful operation, error' + error);
+                    // //console.log('Unsuccessful operation, error' + error);
                     handleShowSnackbar({
                         type: 'error',
                         open: true,
@@ -110,7 +110,7 @@ function AddMovieBtn({ className, children, dataDoc, collectionName, id, uid }) 
                         state: false,
                     }),
                 );
-                console.log('Unsuccessful operation, error' + error);
+                // //console.log('Unsuccessful operation, error' + error);
                 handleShowSnackbar({
                     type: 'error',
                     open: true,

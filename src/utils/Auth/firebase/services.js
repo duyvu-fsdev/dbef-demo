@@ -19,10 +19,10 @@ export const AddDocument = async (collectionName, dataAdd = {}) => {
     const collectionRef = collection(db, collectionName);
     await addDoc(collectionRef, dataAdd)
         .then(() => {
-            console.log('data added successfully');
+            //console.log('data added successfully');
         })
         .catch((error) => {
-            console.log('Unsuccessful operation, error' + error);
+            //console.log('Unsuccessful operation, error' + error);
         });
 };
 
@@ -31,16 +31,16 @@ export const SetDocument = async (collectionName, data = {}, id) => {
     dbRef = doc(collectionRef, id);
     const docSnap = await getDoc(dbRef);
     if (docSnap.exists()) {
-        console.log('Document does not exits !');
+        //console.log('Document does not exits !');
 
         return;
     }
     await setDoc(dbRef, data)
         .then(() => {
-            console.log('data added successfully');
+            //console.log('data added successfully');
         })
         .catch((error) => {
-            console.log('Unsuccessful operation, error' + error);
+            //console.log('Unsuccessful operation, error' + error);
         });
 };
 
@@ -50,15 +50,15 @@ export const DeleteDocument = async (collectionName, id) => {
 
     const docSnap = await getDoc(dbRef);
     if (!docSnap.exists()) {
-        console.log('Document does not exits !');
+        //console.log('Document does not exits !');
     }
 
     await deleteDoc(dbRef)
         .then(() => {
-            console.log('data delete successfully');
+            //console.log('data delete successfully');
         })
         .catch((error) => {
-            console.log('Unsuccessful operation, error' + error);
+            //console.log('Unsuccessful operation, error' + error);
         });
 };
 

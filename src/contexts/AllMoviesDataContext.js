@@ -51,7 +51,6 @@ function AllMoviesDataContextProvider({ children }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log({ allMoviesData });
     const value = {
         allMoviesData,
     };

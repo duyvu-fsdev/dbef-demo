@@ -31,7 +31,7 @@ function NotFoundPage() {
                             backgroundColor: '#000000b8',
                         },
                     }}
-                    href={'/dbef-demo'}
+                    to={'/dbef-demo'}
                 >
                     Go to home <TouchAppIcon />
                 </Button>

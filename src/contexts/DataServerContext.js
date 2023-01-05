@@ -63,8 +63,6 @@ function DataServerContextProvider({ children }) {
 
     const value = { handleChange, handleClick, handleClear, handleFocus, searchValue, showResult };
 
-    console.log({ searchValue, showResult });
-
     return <DataServerContext.Provider value={value}>{children}</DataServerContext.Provider>;
 }
 

@@ -38,19 +38,6 @@ function Action(props) {
     const [dataDoc, setDataDoc] = useState();
 
     const { data, is18, hasUser } = props;
-    let styles = { pointerEvents: 'fill', opacity: 1 };
-
-    if (is18) {
-        styles = {
-            pointerEvents: 'none',
-            opacity: 0.3,
-        };
-    } else {
-        styles = {
-            pointerEvents: 'fill',
-            opacity: 1,
-        };
-    }
 
     const handleShowSnackbar = (state) => {
         dispatch(
@@ -93,12 +80,31 @@ function Action(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uid, data]);
 
+    let styles = { pointerEvents: 'fill', opacity: 1 },
+        URL_ENDPOINT,
+        url;
+
+    if (is18) {
+        URL_ENDPOINT = '';
+        url = '';
+        styles = {
+            pointerEvents: 'none',
+            opacity: 0.3,
+        };
+    } else {
+        URL_ENDPOINT = `${process.env.REACT_APP_BASE_URL_ENDPOINT}xem-phim&name=${data.slug}&id=0&ep=1`;
+        url = `/dbef-demo/xem-phim&name=${slug}&id=0&ep=1`;
+        styles = {
+            pointerEvents: 'fill',
+            opacity: 1,
+        };
+    }
     return (
         <>
             <Box sx={{ width: { 0: '100%', 480: '480px', 720: '320px' }, margin: '0 auto', ...styles }}>
                 <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={1} className={cx('action-warrper')}>
                     <Box gridColumn="span 4">
-                        <Button text to={`/dbef-demo/xem-phim&name=${slug}&id=0&ep=1`} className={cx('action-btn')}>
+                        <Button text to={url} className={cx('action-btn')}>
                             <PlayArrowIcon />
                         </Button>
                     </Box>
@@ -159,47 +165,32 @@ function Action(props) {
                                 disableTouchListener
                                 title={
                                     <div className={cx('share-wrapper')}>
-                                        <FacebookShareButton
-                                            className={cx('share-block')}
-                                            url={`${process.env.REACT_APP_BASE_URL_ENDPOINT}/xem-phim&name=${data.slug}&id=0&ep=1`}
-                                        >
+                                        <FacebookShareButton className={cx('share-block')} url={URL_ENDPOINT}>
                                             <div className={cx('share-item')}>
                                                 <FacebookIcon className={cx('share-icon')} />
                                                 <p className={cx('share-title')}>Facebook</p>
                                             </div>
                                         </FacebookShareButton>
 
-                                        <FacebookMessengerShareButton
-                                            className={cx('share-block')}
-                                            url={`${process.env.REACT_APP_BASE_URL_ENDPOINT}/xem-phim&name=${data.slug}&id=0&ep=1`}
-                                        >
+                                        <FacebookMessengerShareButton className={cx('share-block')} url={URL_ENDPOINT}>
                                             <div className={cx('share-item')}>
                                                 <FacebookMessengerIcon className={cx('share-icon')} />
                                                 <p className={cx('share-title')}>Messenger</p>
                                             </div>
                                         </FacebookMessengerShareButton>
-                                        <TwitterShareButton
-                                            className={cx('share-block')}
-                                            url={`${process.env.REACT_APP_BASE_URL_ENDPOINT}/xem-phim&name=${data.slug}&id=0&ep=1`}
-                                        >
+                                        <TwitterShareButton className={cx('share-block')} url={URL_ENDPOINT}>
                                             <div className={cx('share-item')}>
                                                 <TwitterIcon className={cx('share-icon')} />
                                                 <p className={cx('share-title')}>Twitter</p>
                                             </div>
                                         </TwitterShareButton>
-                                        <TelegramShareButton
-                                            className={cx('share-block')}
-                                            url={`${process.env.REACT_APP_BASE_URL_ENDPOINT}/xem-phim&name=${data.slug}&id=0&ep=1`}
-                                        >
+                                        <TelegramShareButton className={cx('share-block')} url={URL_ENDPOINT}>
                                             <div className={cx('share-item')}>
                                                 <TelegramIcon className={cx('share-icon')} />
                                                 <p className={cx('share-title')}>Telegram</p>
                                             </div>
                                         </TelegramShareButton>
-                                        <EmailShareButton
-                                            className={cx('share-block')}
-                                            url={`${process.env.REACT_APP_BASE_URL_ENDPOINT}/xem-phim&name=${data.slug}&id=0&ep=1`}
-                                        >
+                                        <EmailShareButton className={cx('share-block')} url={URL_ENDPOINT}>
                                             <div className={cx('share-item')}>
                                                 <EmailIcon className={cx('share-icon')} />
                                                 <p className={cx('share-title')}>Email</p>
@@ -209,9 +200,7 @@ function Action(props) {
                                         <Button
                                             className={cx('share-block')}
                                             onClick={() => {
-                                                navigator.clipboard.writeText(
-                                                    `${process.env.REACT_APP_BASE_URL_ENDPOINT}/xem-phim&name=${data.slug}&id=0&ep=1`,
-                                                );
+                                                navigator.clipboard.writeText(URL_ENDPOINT);
 
                                                 handleShowSnackbar({
                                                     type: 'success',

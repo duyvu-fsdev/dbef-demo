@@ -70,7 +70,7 @@ function Pagination(props) {
                     '--pointer-events': `${style.pointerEventsPreV}`,
                     '--opacity': `${style.opacityPrev}`,
                 }}
-                to={`/dbef-demo/danh-sach/phim-moi-cap-nhat&page=${currentPage - 1}.html`}
+                to={`/danh-sach/phim-moi-cap-nhat&page=${currentPage - 1}.html`}
                 disabled={currentPage <= 1}
                 onClick={() => handlePageChange(currentPage - 1)}
             >
@@ -87,7 +87,7 @@ function Pagination(props) {
                     '--pointer-events': `${style.pointerEventsNext}`,
                     '--opacity': `${style.opacityNext}`,
                 }}
-                to={`/dbef-demo/danh-sach/phim-moi-cap-nhat&page=${currentPage + 1}.html`}
+                to={`/danh-sach/phim-moi-cap-nhat&page=${currentPage + 1}.html`}
                 disabled={currentPage >= totalPages}
                 onClick={() => handlePageChange(currentPage + 1)}
             >
@@ -108,7 +108,7 @@ function Pagination(props) {
                     '--pointer-events': `${style.pointerEventsNext}`,
                     '--opacity': `${style.opacityNext}`,
                 }}
-                to={`/dbef-demo/danh-sach/phim-moi-cap-nhat&page=${pageInput}.html `}
+                to={`/danh-sach/phim-moi-cap-nhat&page=${pageInput}.html `}
                 disabled={currentPage >= totalPages}
                 onClick={() => {
                     if (pageInput <= 0 || pageInput > totalPages || pageInput === '') {

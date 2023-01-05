@@ -122,7 +122,7 @@ function Profile() {
                         })();
                     }, 5000);
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {});
 
             return;
         }
@@ -153,11 +153,14 @@ function Profile() {
                     <div className={cx('form-group')}>
                         <div className={cx('account-box')}>
                             <div className={cx('portrait-container')}>
-                                {photoURL ? (
-                                    <img className={cx('portrait')} src={photoURL} alt="portrait" />
-                                ) : (
-                                    <UserAvatar className={cx('portrait')} style={{ width: '70px', height: '70px' }} />
-                                )}
+                                <UserAvatar
+                                    style={{
+                                        width: '70px',
+                                        height: '70px',
+                                        border: '1px solid currentColor',
+                                        marginRight: '24px',
+                                    }}
+                                />
 
                                 <div className={cx('portrait-right')}>
                                     <div className={cx('username')}>
@@ -214,7 +217,7 @@ function Profile() {
                                                     id="alert-dialog-description"
                                                 >
                                                     All data about you will be permanently deleted. Do you want to
-                                                    continue deleting ?
+                                                    continue ?
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions sx={{ color: 'inherit' }}>

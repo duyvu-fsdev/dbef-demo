@@ -9,7 +9,7 @@ const routes = {
     list: '/dbef-demo/danh-sach/phim-moi-cap-nhat&:id',
     profile: '/dbef-demo/profile',
     watchLater: '/dbef-demo/watchLater',
-    notfoundpage: '*',
+    notfoundpage: '/dbef-demo/*',
 };
 
 const PublicRoutes = [

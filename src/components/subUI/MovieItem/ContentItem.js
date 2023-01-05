@@ -46,7 +46,7 @@ function ContentItem({ data, isWatchLater }) {
                 <div className={cx('actions')}>
                     <Tooltip arrow title="Play">
                         <div className={cx('btn')}>
-                            <Button to={`/dbef-demo/xem-phim&name=${slug}&id=0&ep=1`} text>
+                            <Button to={`/xem-phim&name=${slug}&id=0&ep=1`} text>
                                 <PlayArrowIcon sx={{ fontSize: '2rem' }} />
                             </Button>
                         </div>

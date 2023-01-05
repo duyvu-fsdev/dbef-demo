@@ -1,7 +1,8 @@
 import { addDoc, collection, doc, updateDoc } from '@firebase/firestore';
 import { getAdditionalUserInfo } from 'firebase/auth';
-import { db } from './firebaseConfig';
 import { serverTimestamp } from 'firebase/firestore';
+
+import { db } from './firebaseConfig';
 
 function addDocument(user, fullName) {
     const details = getAdditionalUserInfo(user);
@@ -18,9 +19,8 @@ function addDocument(user, fullName) {
             emailVerified,
             gender: null,
             birthYear: null,
+            avatar: null,
         };
-
-        console.log({ details, user, dataDoc, dbRef });
 
         addDoc(dbRef, dataDoc)
             .then((docRef) => {
@@ -32,7 +32,7 @@ function addDocument(user, fullName) {
                 updateDoc(ref, updateDataDoc);
             })
             .catch((error) => {
-                console.log(error);
+                //console.log(error);
             });
     }
 }

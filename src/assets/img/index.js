@@ -7,6 +7,10 @@ const images = {
     forward: require('./forwardIcon.svg').default,
     clear: require('./clearIcon.svg').default,
     noPoster: require('./NoPoster.png'),
+    female: require('./female.png'),
+    male: require('./male.png'),
+    orther: require('./orther.png'),
+    not: require('./not.png'),
 };
 
 export default images;
