@@ -45,8 +45,7 @@
     left: -18vmin;
 }
 
-.wrong-para,
-.bottom {
+.wrong-para {
     font-family: 'Montserrat', sans-serif;
     position: absolute;
     bottom: 5vmin;
@@ -77,6 +76,28 @@
     }
     to {
         opacity: 0;
+    }
+}
+
+.container {
+    .botton {
+        position: absolute;
+        bottom: 1vmin;
+        padding: 6px 24px;
+        color: inherit;
+    }
+}
+
+a.button {
+    position: absolute;
+    bottom: 1vmin;
+    padding: 6px 24px;
+    color: inherit;
+
+    &:hover {
+        color: var(--main-color);
+        border-color: currentcolor;
+        background-color: #000000b8;
     }
 }
 

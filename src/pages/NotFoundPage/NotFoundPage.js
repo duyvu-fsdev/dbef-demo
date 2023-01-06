@@ -1,9 +1,9 @@
-import classNames from 'classnames/bind';
-import styles from './NotFoundPage.module.scss';
-
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Button } from '@mui/material';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
+import classNames from 'classnames/bind';
+
+import { Button } from '_/components/subUI';
+import styles from './NotFoundPage.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -17,20 +17,20 @@ function NotFoundPage() {
                 <h1 className={cx('second-four')}>4</h1>
                 <p className={cx('wrong-para')}>Uh Oh! Page not found!</p>
                 <Button
-                    variant="outlined"
+                    outline
                     className={cx('button')}
-                    sx={{
-                        position: 'absolute',
-                        bottom: '1vmin',
-                        padding: '6px 24px',
-                        color: 'inherit',
-                        borderColor: 'currentcolor',
-                        ':hover': {
-                            color: 'var(--main-color)',
-                            borderColor: 'currentcolor',
-                            backgroundColor: '#000000b8',
-                        },
-                    }}
+                    // sx={{
+                    //     position: 'absolute',
+                    //     bottom: '1vmin',
+                    //     padding: '6px 24px',
+                    //     color: 'inherit',
+                    //     borderColor: 'currentcolor',
+                    //     ':hover': {
+                    //         color: 'var(--main-color)',
+                    //         borderColor: 'currentcolor',
+                    //         backgroundColor: '#000000b8',
+                    //     },
+                    // }}
                     to={'/'}
                 >
                     Go to home <TouchAppIcon />
