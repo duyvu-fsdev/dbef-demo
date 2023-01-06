@@ -26,7 +26,7 @@ function SearchMovieItem(props) {
             }}
             className={cx('search-item')}
         >
-            <Button to={`/dbef-demo/phim&name=${slug}`} className={cx('overlay')} onClick={handleClick}></Button>
+            <Button to={`/phim&name=${slug}`} className={cx('overlay')} onClick={handleClick}></Button>
             <div className={cx('movie-img-block')}>
                 <img className={cx('movie-img')} src={`${pathImage}${thumbUrl}`} alt={name} />
             </div>

@@ -27,7 +27,7 @@ function ContentItem({ data, isWatchLater }) {
     return (
         <div className={cx('item')}>
             <div className={cx('item-container')}>
-                <Link className={cx('link')} to={`/dbef-demo/phim&name=${slug}`}>
+                <Link className={cx('link')} to={`/phim&name=${slug}`}>
                     <div className={cx('image-container')}>
                         <div className={cx('image')}>
                             <img className={cx('thubm')} src={thumbUrl} alt={name} />

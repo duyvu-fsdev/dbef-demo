@@ -42,9 +42,13 @@ function AllMoviesDataContextProvider({ children }) {
                             });
                         });
                 }
-                setAllMoviesData({
-                    data: dataReturn,
-                    pathImage: result.pathImage,
+                setAllMoviesData(() => {
+                    const pathImage = result.pathImage.replace('http:', 'https:');
+
+                    return {
+                        data: dataReturn,
+                        pathImage,
+                    };
                 });
             })
             .catch(() => {});

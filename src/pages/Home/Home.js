@@ -23,8 +23,8 @@ function Home() {
                 const data = result.items;
                 const value = data.map((data) => {
                     const { name, origin_name, poster_url, slug, thumb_url } = data;
-                    const posterUrl = `${result.pathImage}${poster_url}`;
-                    const thumbUrl = `${result.pathImage}${thumb_url}`;
+                    const posterUrl = `${result.pathImage.replace('http:', 'https:')}${poster_url}`;
+                    const thumbUrl = `${result.pathImage.replace('http:', 'https:')}${thumb_url}`;
                     const originName = origin_name;
 
                     const value = { name, originName, slug, posterUrl, thumbUrl };
@@ -48,7 +48,11 @@ function Home() {
                         <div className={cx('children-content')}>
                             <div className={cx('title')}>
                                 <div>Phim mới cập nhật</div>
-                                <Button to={`/danh-sach/phim-moi-cap-nhat&page=1.html`} className={cx('see-more')} text>
+                                <Button
+                                    to={`${process.env.REACT_APP_BASE_URL_ENDPOINT}/danh-sach/phim-moi-cap-nhat&page=1.html`}
+                                    className={cx('see-more')}
+                                    text
+                                >
                                     Xem thêm
                                 </Button>
                             </div>

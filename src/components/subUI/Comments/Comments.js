@@ -1,22 +1,20 @@
 import { collection, doc, getDoc, onSnapshot, query, setDoc, updateDoc, where } from '@firebase/firestore';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-
 import { v4 as uuidv4 } from 'uuid';
 
 import { db } from '_/utils/Auth/firebase/firebaseConfig';
-import { useAuth } from '_/contexts/AuthContext';
 import LoginBtn from '../LoginBtn/LoginBtn';
-
 import Comment from './Comment';
 import styles from './comment.module.scss';
 import CommentForm from './CommentForm';
+import { useFireStore } from '_/contexts/FireStoreContext';
 
 const cx = classNames.bind(styles);
 
 function Comments({ id }) {
     const [data, setData] = useState();
-    const { currentUser } = useAuth();
+    const { userData } = useFireStore();
     const [comments, setComments] = useState([]);
     const [activeComment, setActiveComment] = useState(null);
 
@@ -27,11 +25,12 @@ function Comments({ id }) {
     };
 
     useEffect(() => {
-        if (!currentUser) return;
+        if (!userData) return;
 
-        const { uid, displayName, photoURL } = currentUser;
+        const { uid, displayName, photoURL, avatarUrl } = userData;
 
         setData({
+            avatarUrl,
             photoURL,
             uid,
             displayName,
@@ -48,7 +47,7 @@ function Comments({ id }) {
                 ':' +
                 new Date().getSeconds(),
         });
-    }, [currentUser, id]);
+    }, [userData, id]);
 
     useEffect(() => {
         const collectionRef = collection(db, 'comments');
@@ -125,7 +124,7 @@ function Comments({ id }) {
         <div className={cx('comments-wrapper')}>
             <div className={cx('comments')}>
                 <h3 className={cx('comments-title')}>Comments</h3>
-                {currentUser ? (
+                {userData ? (
                     <CommentForm submitLabel="Write" handleSubmit={addComment} />
                 ) : (
                     <div className={cx('login-btn-container')}>

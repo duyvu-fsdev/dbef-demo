@@ -93,7 +93,7 @@ function Action(props) {
         };
     } else {
         URL_ENDPOINT = `${process.env.REACT_APP_BASE_URL_ENDPOINT}xem-phim&name=${data.slug}&id=0&ep=1`;
-        url = `/dbef-demo/xem-phim&name=${slug}&id=0&ep=1`;
+        url = `/xem-phim&name=${slug}&id=0&ep=1`;
         styles = {
             pointerEvents: 'fill',
             opacity: 1,

@@ -1,7 +1,7 @@
 {
     "name": "base",
     "version": "0.1.0",
-    "homepage": "https://vqduydz.github.io/dbef-demo",
+    "homepage": "https://vqduydz.github.io/",
     "private": true,
     "dependencies": {
         "@emotion/react": "^11.10.5",

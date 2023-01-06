@@ -16,7 +16,7 @@ function Logout() {
         e.preventDefault();
         signOut(auth)
             .then(() => {
-                navigate('/dbef-demo');
+                navigate('/');
             })
             .catch((error) => {
                 // An error happened.

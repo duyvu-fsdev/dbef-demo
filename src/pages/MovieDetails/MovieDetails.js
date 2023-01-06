@@ -117,7 +117,7 @@ function MovieDetails() {
         } else if (hasUser && (age < 18 || new Date().getFullYear())) {
             msg = 'Has not updated age or is under 18 years old';
             btnRender = () => (
-                <Button to={'/dbef-demo/profile'} primary scale className={cx('to-profile')}>
+                <Button to={'/profile'} primary scale className={cx('to-profile')}>
                     Check profile
                 </Button>
             );

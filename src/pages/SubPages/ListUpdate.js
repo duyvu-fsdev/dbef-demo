@@ -31,8 +31,8 @@ function ListUpdate() {
 
                 const value = data.map((data) => {
                     const { name, origin_name, poster_url, slug, thumb_url } = data;
-                    const posterUrl = `${result.pathImage}${poster_url}`;
-                    const thumbUrl = `${result.pathImage}${thumb_url}`;
+                    const posterUrl = `${result.pathImage.replace('http:', 'https:')}${poster_url}`;
+                    const thumbUrl = `${result.pathImage.replace('http:', 'https:')}${thumb_url}`;
                     const originName = origin_name;
 
                     const value = { name, originName, slug, posterUrl, thumbUrl };

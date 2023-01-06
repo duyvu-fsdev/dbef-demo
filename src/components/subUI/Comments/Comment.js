@@ -29,13 +29,14 @@ function Comment(props) {
     const canReply = Boolean(uid);
     const canEdit = uid === comment.uid;
     const replyId = parentId ? parentId : comment.id;
+    const url = comment.avatarUrl ? comment.avatarUrl : comment.photoURL;
 
     return (
         <div>
             <div key={comment.id} className={cx('comment')}>
                 <div className={cx('comment-image-container')}>
                     {comment.photoURL ? (
-                        <img className={cx('comment-image')} src={comment.photoURL} alt="" />
+                        <img className={cx('comment-image')} src={url} alt="" />
                     ) : (
                         <AccountCircleIcon sx={{ width: '30px', height: '30px' }} />
                     )}

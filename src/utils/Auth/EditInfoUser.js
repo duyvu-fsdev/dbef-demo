@@ -90,8 +90,6 @@ function EditInfoUser() {
             };
         })();
 
-        console.log({ updateDataDoc });
-
         updateDoc(ref, updateDataDoc).then(() => {
             dispatch(
                 showLoadingSlice.actions.showLoading({

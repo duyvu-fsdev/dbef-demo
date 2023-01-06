@@ -87,7 +87,7 @@ function Sidebar() {
                     <div className={cx('sidebar-block')}>
                         {currentUser !== null ? (
                             <>
-                                <Button to={'/dbef-demo/watchLater'} text className={cx('sidebar-btn')}>
+                                <Button to={'/watchLater'} text className={cx('sidebar-btn')}>
                                     <Tooltip title="Watch later" arrow placement="right-start">
                                         <Box sx={{ display: { 0: 'flex', 1280: 'none' } }}>
                                             <AccessTimeIcon className={cx('icon')} />

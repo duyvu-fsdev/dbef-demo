@@ -9,10 +9,10 @@ const cx = classNames.bind(styles);
 
 function SlideItem(props) {
     const { slug, url, name } = props;
-    const src = url === 'http://img.ophim1.cc/uploads/movies/';
+    const src = url === 'https://img.ophim1.cc/uploads/movies/';
     return (
         <div className={cx('slider')}>
-            <Button to={`/dbef-demo/phim&name=${slug}`} className={cx('banner-btn')}>
+            <Button to={`/phim&name=${slug}`} className={cx('banner-btn')}>
                 {src ? (
                     <Box
                         sx={{ paddingTop: '25%', fontSize: '6rem', textAlign: 'center', color: '#fff' }}
