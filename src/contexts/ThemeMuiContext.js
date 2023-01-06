@@ -15,7 +15,7 @@ export const useThemMui = () => useContext(ThemeMuiContext);
 function ThemeMuiContextProvider({ children }) {
     const them = useTheme();
     localStorage.getItem('testObject');
-    const [mode, setMode] = useState(JSON.parse(localStorage.getItem('mode')) || 'light');
+    const [mode, setMode] = useState(JSON.parse(localStorage.getItem('mode')) || 'dark');
     const [showSidebar, setShow] = useState(false);
 
     useEffect(() => {
