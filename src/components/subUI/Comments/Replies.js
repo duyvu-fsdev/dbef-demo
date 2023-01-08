@@ -1,26 +1,35 @@
-import CommentForm from './CommentForm';
-import classNames from 'classnames/bind';
-
-import styles from './comment.module.scss';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
+
 import DelCmtConfirm from '_/utils/Auth/DelCmtConfirm';
+import { useDocument } from '_/utils/Auth/firebase/services';
+import styles from './comment.module.scss';
+import CommentForm from './CommentForm';
 
 const cx = classNames.bind(styles);
 
 function Replies(props) {
     const { comment, setActiveComment, activeComment, updateComment, deleteComment, parentId, uid } = props;
+    const [src, setSrc] = useState('');
     const isEditing = activeComment && activeComment.id === comment.id && activeComment.type === 'editing';
 
     const canDelete = uid === comment.uid;
     const canReply = Boolean(uid);
     const canEdit = uid === comment.uid;
+    const commentUser = useDocument('users', 'uid', '==', comment.uid);
+    useEffect(() => {
+        if (commentUser.length === 0) return;
+        const { avatarUrl, photoURL } = commentUser[0];
+        setSrc(avatarUrl ? avatarUrl : photoURL);
+    }, [comment, commentUser]);
 
     return (
         <div>
             <div key={comment.id} className={cx('comment')}>
                 <div className={cx('comment-image-container')}>
-                    {comment.photoURL ? (
-                        <img className={cx('comment-image')} src={comment.photoURL} alt="" />
+                    {src ? (
+                        <img className={cx('comment-image')} src={src} alt="" />
                     ) : (
                         <AccountCircleIcon sx={{ width: '30px', height: '30px' }} />
                     )}

@@ -12,24 +12,34 @@ import { useFireStore } from '../../contexts/FireStoreContext';
 import removeVietnameseTones from '../removeVietnameseTones';
 import styles from './Auth.modelu.scss';
 import { db } from './firebase/firebaseConfig';
+import { testImage } from './testImage';
 
 const cx = classNames.bind(styles);
 
 function EditInfoUser() {
     const dispatch = useDispatch();
+    const { fireStoreData } = useFireStore();
     const [gender, setGender] = useState('Female');
     const [avatar, setAvatar] = useState('undefined');
     const [birthYear, setbirthYear] = useState('');
+    const [urlBox, setUrlBox] = useState(false);
+    const [avatarSrc, setAvatarSrc] = useState('');
     const [phoneNumber, setMobileNumber] = useState('');
     const mounted = useRef(false);
-    const { userData } = useFireStore();
 
     useEffect(() => {
         mounted.current = true;
+        if (fireStoreData) {
+            const { currentUserData } = fireStoreData;
+            const { avatarUrl, photoURL, gender } = currentUserData;
+            setAvatar(avatarUrl || photoURL || 'undefined');
+            setGender(gender || 'Female');
+        }
+
         return () => {
             mounted.current = false;
         };
-    }, []);
+    }, [fireStoreData]);
 
     const handleShowSnackbar = (state) => {
         dispatch(
@@ -73,35 +83,80 @@ function EditInfoUser() {
         }
 
         e.preventDefault();
-        const { id } = userData;
+        const currentUserData = fireStoreData.currentUserData;
+        const { id } = currentUserData;
         const ref = doc(db, 'users', id);
 
-        const updateDataDoc = (() => {
-            const avatarUrl = avatar === 'undefined' ? null : avatar;
+        (() => {
+            if (urlBox) {
+                testImage(avatarSrc)
+                    .then((avatarUrl) => {
+                        const updateDataDoc = (() => {
+                            if (!Boolean(birthYear) && !phoneNumber) return { gender, avatarUrl };
+                            if (!Boolean(birthYear) && phoneNumber) return { gender, phoneNumber, avatarUrl };
+                            if (birthYear && !phoneNumber) return { gender, birthYear, avatarUrl };
+                            return {
+                                birthYear,
+                                phoneNumber,
+                                gender,
+                                avatarUrl,
+                            };
+                        })();
+                        updateDoc(ref, updateDataDoc).then(() => {
+                            dispatch(
+                                showLoadingSlice.actions.showLoading({
+                                    state: false,
+                                }),
+                            );
+                            dispatch(
+                                showModalSlice.actions.showModal({
+                                    state: false,
+                                }),
+                            );
+                        });
+                    })
+                    .catch((error) => {
+                        dispatch(
+                            showLoadingSlice.actions.showLoading({
+                                state: false,
+                            }),
+                        );
+                        handleShowSnackbar({
+                            type: 'warning',
+                            open: true,
+                            message: 'Invalid avatar url !',
+                        });
+                        handleHideSnackbar();
+                    });
+                return;
+            }
 
-            if (!Boolean(birthYear) && !phoneNumber) return { gender, avatarUrl };
-            if (!Boolean(birthYear) && phoneNumber) return { gender, phoneNumber, avatarUrl };
-            if (birthYear && !phoneNumber) return { gender, birthYear, avatarUrl };
-            return {
-                birthYear,
-                phoneNumber,
-                gender,
-                avatarUrl,
-            };
+            const updateDataDoc = (() => {
+                const avatarUrl = avatar === 'undefined' ? null : avatar;
+                if (!Boolean(birthYear) && !phoneNumber) return { gender, avatarUrl };
+                if (!Boolean(birthYear) && phoneNumber) return { gender, phoneNumber, avatarUrl };
+                if (birthYear && !phoneNumber) return { gender, birthYear, avatarUrl };
+                return {
+                    birthYear,
+                    phoneNumber,
+                    gender,
+                    avatarUrl,
+                };
+            })();
+            updateDoc(ref, updateDataDoc).then(() => {
+                dispatch(
+                    showLoadingSlice.actions.showLoading({
+                        state: false,
+                    }),
+                );
+                dispatch(
+                    showModalSlice.actions.showModal({
+                        state: false,
+                    }),
+                );
+            });
+            return;
         })();
-
-        updateDoc(ref, updateDataDoc).then(() => {
-            dispatch(
-                showLoadingSlice.actions.showLoading({
-                    state: false,
-                }),
-            );
-            dispatch(
-                showModalSlice.actions.showModal({
-                    state: false,
-                }),
-            );
-        });
     };
 
     return (
@@ -216,47 +271,51 @@ function EditInfoUser() {
                     <FormLabel id="demo-row-radio-buttons-group-label">Customs Avatar</FormLabel>
 
                     <RadioGroup
-                        sx={{ display: 'grid', gridTemplateColumns: 'repeat( 4, minmax(25%, 1fr))' }}
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}
                         row
                         aria-labelledby="demo-row-radio-buttons-group-label"
                         name="row-radio-buttons-group"
-                        value={avatar}
+                        value={urlBox ? avatarSrc : avatar}
                         onChange={(e) => {
                             const value = e.target.value;
                             setAvatar(value);
                         }}
                     >
                         <FormControlLabel
+                            onClick={() => {
+                                setUrlBox(false);
+                            }}
                             sx={{
-                                m: 0,
-                                display: 'flex',
-                                textAlign: 'center',
-                                flexDirection: 'column',
-                                alignItems: 'center',
+                                mb: 6,
+                                mt: 2,
                             }}
                             value="undefined"
                             control={<Radio />}
                             label={
                                 <Box
                                     sx={{
-                                        textAlign: 'center',
                                         display: 'flex',
+                                        width: '100%',
+                                        flexDirection: 'unset',
                                         alignItems: 'center',
-                                        justifyContent: 'center',
-                                        flexDirection: 'column',
                                     }}
                                 >
                                     <img className={cx('avartar')} src={images.not} alt="Loading" />
+                                    <Typography variant="h6" sx={{ opacity: 0.5 }}>
+                                        default avatar
+                                    </Typography>{' '}
                                 </Box>
                             }
                         />
                         <FormControlLabel
+                            onClick={() => {
+                                setUrlBox(false);
+                            }}
                             sx={{
-                                m: 0,
-                                display: 'flex',
-                                textAlign: 'center',
-                                flexDirection: 'column',
-                                alignItems: 'center',
+                                mb: 6,
                             }}
                             value="https://www.w3schools.com/howto/img_avatar2.png"
                             control={<Radio />}
@@ -264,61 +323,96 @@ function EditInfoUser() {
                                 <Box
                                     sx={{
                                         textAlign: 'center',
-                                        display: 'flex',
-                                        alignItems: 'center',
                                         justifyContent: 'center',
-                                        flexDirection: 'column',
+                                        display: 'flex',
+                                        width: '100%',
+                                        flexDirection: 'unset',
+                                        alignItems: 'center',
                                     }}
                                 >
                                     <img className={cx('avartar')} src={images.female} alt="Loading" />
+                                    <Typography variant="h6" sx={{ opacity: 0.5 }}>
+                                        Female avatar
+                                    </Typography>{' '}
                                 </Box>
                             }
                         />
                         <FormControlLabel
+                            onClick={() => {
+                                setUrlBox(false);
+                            }}
                             sx={{
-                                m: 0,
-                                display: 'flex',
-                                textAlign: 'center',
-                                flexDirection: 'column',
-                                alignItems: 'center',
+                                mb: 6,
                             }}
                             value="https://www.w3schools.com/howto/img_avatar.png"
                             control={<Radio />}
                             label={
                                 <Box
                                     sx={{
-                                        textAlign: 'center',
                                         display: 'flex',
+                                        width: '100%',
+                                        flexDirection: 'unset',
                                         alignItems: 'center',
-                                        justifyContent: 'center',
-                                        flexDirection: 'column',
                                     }}
                                 >
                                     <img className={cx('avartar')} src={images.male} alt="Loading" />
+                                    <Typography variant="h6" sx={{ opacity: 0.5 }}>
+                                        Male avatar
+                                    </Typography>
                                 </Box>
                             }
                         />
                         <FormControlLabel
-                            sx={{
-                                m: 0,
-                                display: 'flex',
-                                textAlign: 'center',
-                                flexDirection: 'column',
-                                alignItems: 'center',
+                            onClick={() => {
+                                setUrlBox(true);
+                                setAvatar('undefined');
                             }}
-                            value="https://www.w3schools.com/w3images/avatar5.png"
-                            control={<Radio />}
+                            sx={{
+                                mb: 6,
+                                '& .MuiTypography-root': {
+                                    width: '100%',
+                                },
+                            }}
+                            value={urlBox ? avatarSrc : 'non'}
+                            control={<Radio id="ct-url" />}
                             label={
                                 <Box
                                     sx={{
-                                        textAlign: 'center',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         flexDirection: 'column',
                                     }}
                                 >
-                                    <img className={cx('avartar')} src={images.orther} alt="Loading" />
+                                    {!urlBox && (
+                                        <Typography variant="h6" sx={{ opacity: 0.5 }}>
+                                            Customs avatar
+                                        </Typography>
+                                    )}
+                                    {urlBox && (
+                                        <MyTextField
+                                            sx={{
+                                                width: '100%',
+                                                '& label': {
+                                                    lineHeight: 1,
+                                                },
+
+                                                '& input': {
+                                                    padding: '5px 14px',
+                                                },
+                                            }}
+                                            label="Enter avatar url"
+                                            size="small"
+                                            type="text"
+                                            value={avatarSrc}
+                                            onChange={(e) => {
+                                                let letter = e.target.value;
+                                                if (!letter.startsWith(' ')) {
+                                                    setAvatarSrc(letter);
+                                                }
+                                            }}
+                                        />
+                                    )}
                                 </Box>
                             }
                         />

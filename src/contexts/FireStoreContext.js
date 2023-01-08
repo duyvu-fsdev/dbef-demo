@@ -1,39 +1,64 @@
+import { collection, getDocs } from '@firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 import { useAuth } from '_/contexts/AuthContext';
+import { db } from '_/utils/Auth/firebase/firebaseConfig';
 import { useDocument } from '../utils/Auth/firebase/services';
 
 const FireStoreContext = createContext({
-    movieData: null,
-    userData: null,
-    clearUserData: () => {},
+    fireStoreData: { watchLaterMovies: null, currentUserData: null, allUserData: null, allCommentsData: null },
+    // clearUserData: () => {},
 });
 
 export const useFireStore = () => useContext(FireStoreContext);
 
 function FireStoreContextProvider({ children }) {
     const { uid } = useAuth();
-    const [movieData, setMovieData] = useState(null);
-    const [userData, setUserData] = useState(null);
+    const [fireStoreData, setFireStoreData] = useState({
+        watchLaterMovies: null,
+        currentUserData: null,
+        allUserData: null,
+    });
 
     // eslint-disable-next-line no-self-assign
-    const userDocuments = useDocument('users', 'uid', '==', uid);
-    const movieDocuments = useDocument('watch_later_list', 'uid', 'array-contains', uid);
+    const currentUserDataDoc = useDocument('users', 'uid', '==', uid);
+    const movieDataDoc = useDocument('watch_later_list', 'uid', 'array-contains', uid);
 
     useEffect(() => {
-        setMovieData(movieDocuments);
-        if (!uid) setUserData();
-        else setUserData(...userDocuments);
-    }, [userDocuments, uid, movieDocuments]);
+        const allUserData = [];
+        (async () => {
+            const colRef = collection(db, 'users');
+            const docsSnap = await getDocs(colRef);
+            docsSnap.forEach((doc) => allUserData.push(doc.data()));
+        })();
 
-    const clearUserData = () => {
-        setUserData();
-    };
+        const allCommentsData = [];
+        (async () => {
+            const colRef = collection(db, 'comments');
+            const docsSnap = await getDocs(colRef);
+            docsSnap.forEach((doc) => allCommentsData.push(doc.data()));
+        })();
 
+        uid
+            ? setFireStoreData({
+                  currentUserData: { ...currentUserDataDoc[0] },
+                  watchLaterMovies: movieDataDoc,
+                  allUserData,
+                  allCommentsData,
+              })
+            : setFireStoreData({
+                  watchLaterMovies: null,
+                  currentUserData: null,
+                  allUserData: null,
+              });
+    }, [currentUserDataDoc, movieDataDoc, uid]);
+
+    // const clearUserData = () => {
+    //     setUserData();
+    // };
     const value = {
-        userData,
-        movieData,
-        clearUserData,
+        fireStoreData,
+        // clearUserData,
     };
 
     return <FireStoreContext.Provider value={value}>{children}</FireStoreContext.Provider>;

@@ -13,8 +13,8 @@ import { useFireStore } from '_/contexts/FireStoreContext';
 const cx = classNames.bind(styles);
 
 function Comments({ id }) {
+    const { fireStoreData } = useFireStore();
     const [data, setData] = useState();
-    const { userData } = useFireStore();
     const [comments, setComments] = useState([]);
     const [activeComment, setActiveComment] = useState(null);
 
@@ -23,15 +23,13 @@ function Comments({ id }) {
         const replies = comments?.filter((data) => data.parentId === id);
         return replies.reverse((a, b) => b - a);
     };
+    const { currentUserData } = fireStoreData;
 
     useEffect(() => {
-        if (!userData) return;
-
-        const { uid, displayName, photoURL, avatarUrl } = userData;
+        if (!currentUserData) return;
+        const { uid, displayName } = currentUserData;
 
         setData({
-            avatarUrl,
-            photoURL,
             uid,
             displayName,
             createdAt:
@@ -47,7 +45,7 @@ function Comments({ id }) {
                 ':' +
                 new Date().getSeconds(),
         });
-    }, [userData, id]);
+    }, [currentUserData]);
 
     useEffect(() => {
         const collectionRef = collection(db, 'comments');
@@ -124,7 +122,7 @@ function Comments({ id }) {
         <div className={cx('comments-wrapper')}>
             <div className={cx('comments')}>
                 <h3 className={cx('comments-title')}>Comments</h3>
-                {userData ? (
+                {currentUserData ? (
                     <CommentForm submitLabel="Write" handleSubmit={addComment} />
                 ) : (
                     <div className={cx('login-btn-container')}>

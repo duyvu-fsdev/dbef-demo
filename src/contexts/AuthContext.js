@@ -23,7 +23,7 @@ const AuthContext = createContext({
     forgotPassword: () => Promise,
     signInWithGoogle: () => Promise,
     signInWithFaceBook: () => Promise,
-    deleteAccont: () => Promise,
+    deleteCurrentUser: () => Promise,
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -75,7 +75,7 @@ function AuthContextProvider({ children }) {
         return signInWithPopup(auth, provider);
     }
 
-    function deleteAccont() {
+    function deleteCurrentUser() {
         return deleteUser(auth.currentUser);
     }
 
@@ -89,7 +89,7 @@ function AuthContextProvider({ children }) {
         logout,
         forgotPassword,
         resetPassword,
-        deleteAccont,
+        deleteCurrentUser,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

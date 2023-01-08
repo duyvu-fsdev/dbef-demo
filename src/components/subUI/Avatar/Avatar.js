@@ -7,7 +7,8 @@ import styles from './Avatar.module.scss';
 const cx = classNames.bind(styles);
 
 function UserAvatar({ style, className }) {
-    const { userData } = useFireStore();
+    const { fireStoreData } = useFireStore();
+
     function stringToColor(string) {
         let hash = 0;
         let i;
@@ -42,8 +43,9 @@ function UserAvatar({ style, className }) {
         [className]: className,
     });
 
+    if (!fireStoreData) return;
+    const userData = fireStoreData.currentUserData;
     if (!userData) return;
-
     return userData.photoURL || userData.avatarUrl ? (
         <Avatar
             alt={userData.displayName}
@@ -53,7 +55,7 @@ function UserAvatar({ style, className }) {
         />
     ) : (
         <Avatar
-            style={{ backgroundColor: stringToColor(userData.displayName) }}
+            style={{ backgroundColor: stringToColor(userData.displayName), color: '#fff' }}
             {...stringAvatar(userData.displayName)}
             sx={style}
             className={classes}

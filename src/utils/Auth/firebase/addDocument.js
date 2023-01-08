@@ -19,7 +19,8 @@ function addDocument(user, fullName) {
             emailVerified,
             gender: null,
             birthYear: null,
-            avatar: null,
+            avatarUrl: null,
+            fullName: null,
         };
 
         addDoc(dbRef, dataDoc)

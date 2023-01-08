@@ -1,10 +1,12 @@
-import CommentForm from './CommentForm';
-import classNames from 'classnames/bind';
-
-import styles from './comment.module.scss';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Replies from './Replies';
+import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
+
 import DelCmtConfirm from '_/utils/Auth/DelCmtConfirm';
+import { useDocument } from '_/utils/Auth/firebase/services';
+import styles from './comment.module.scss';
+import CommentForm from './CommentForm';
+import Replies from './Replies';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +22,13 @@ function Comment(props) {
         parentId = null,
         uid,
     } = props;
+    const [src, setSrc] = useState('');
+    const commentUser = useDocument('users', 'uid', '==', comment.uid);
+    useEffect(() => {
+        if (commentUser.length === 0) return;
+        const { avatarUrl, photoURL } = commentUser[0];
+        setSrc(avatarUrl ? avatarUrl : photoURL);
+    }, [comment, commentUser]);
 
     const isEditing = activeComment && activeComment.id === comment.id && activeComment.type === 'editing';
     const isReplying = activeComment && activeComment.id === comment.id && activeComment.type === 'replying';
@@ -29,14 +38,13 @@ function Comment(props) {
     const canReply = Boolean(uid);
     const canEdit = uid === comment.uid;
     const replyId = parentId ? parentId : comment.id;
-    const url = comment.avatarUrl ? comment.avatarUrl : comment.photoURL;
 
     return (
         <div>
             <div key={comment.id} className={cx('comment')}>
                 <div className={cx('comment-image-container')}>
-                    {comment.photoURL ? (
-                        <img className={cx('comment-image')} src={url} alt="" />
+                    {src ? (
+                        <img className={cx('comment-image')} src={src} alt="" />
                     ) : (
                         <AccountCircleIcon sx={{ width: '30px', height: '30px' }} />
                     )}

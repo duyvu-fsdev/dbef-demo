@@ -25,8 +25,10 @@ function Profile() {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const [data, setData] = useState({});
-    const { uid, deleteAccont } = useAuth();
-    const { userData, movieData } = useFireStore();
+    const { uid, deleteCurrentUser } = useAuth();
+    const { fireStoreData } = useFireStore();
+
+    const { watchLaterMovies, currentUserData, allCommentsData } = fireStoreData;
 
     useEffect(() => {
         const idTimeOut = setTimeout(() => {
@@ -39,11 +41,11 @@ function Profile() {
     }, [uid]);
 
     useEffect(() => {
-        if (!userData) return;
-        if (userData.length === 0) return;
-        const { createdAt } = userData;
-        setData({ ...userData, createdAt: new Date(createdAt.seconds * 1000).toString().slice(4, 15) });
-    }, [userData]);
+        if (!currentUserData) return;
+        if (currentUserData.length === 0) return;
+        const { createdAt } = currentUserData;
+        setData({ ...currentUserData, createdAt: new Date(createdAt?.seconds * 1000).toString().slice(4, 15) });
+    }, [currentUserData]);
 
     // eslint-disable-next-line no-unused-vars
     const { birthYear, createdAt, displayName, email, emailVerified, id, phoneNumber, photoURL, gender } = data;
@@ -69,78 +71,90 @@ function Profile() {
         setOpen(false);
     };
 
+    const delWatchLater = () => {
+        watchLaterMovies.forEach((item) => {
+            const collectionRef = collection(db, 'watch_later_list');
+            const dbRef = doc(collectionRef, item.id);
+            (async () => {
+                const docSnap = await getDoc(dbRef);
+                const movies = docSnap.data();
+                let dataUid = movies.uid;
+
+                if (dataUid.length !== 1) {
+                    const uidIndex = dataUid.findIndex((index) => {
+                        return index === uid;
+                    });
+                    dataUid.splice(uidIndex, 1);
+                    updateDoc(dbRef, { uid: dataUid });
+                    return;
+                }
+
+                await deleteDoc(dbRef).then(() => {});
+            })();
+        });
+        return;
+    };
+
+    const delComments = () => {
+        allCommentsData.forEach((item) => {
+            const { comments, id } = item;
+            const collectionRef = collection(db, 'comments');
+            const dbRef = doc(collectionRef, id);
+            //Lọc xóa cmt chính chủ
+            const cmtOwn = comments.filter((comment) => comment.uid !== uid);
+            //Lấy lấy idCmt chính chủ
+            const parentIdList = [];
+            comments.forEach((comment) => {
+                if (comment.uid === uid && !comment.parentId) parentIdList.push(comment.id);
+            });
+            //Lọc xóa cmtAfterDel dưới cmt chính chủ
+            let cmtAfterDel = [];
+            for (let i = 0; i < parentIdList.length; i++) {
+                const id = parentIdList[i];
+                cmtAfterDel = [...cmtAfterDel, ...cmtOwn.filter((comment) => comment.parentId !== id)];
+            }
+            //kiểm tra Remove duplicate
+            cmtAfterDel = [...new Set(cmtAfterDel)];
+            // Đẩy lên lại server
+            const dataDoc = { ...item, comments: cmtAfterDel };
+            updateDoc(dbRef, dataDoc);
+            return;
+        });
+    };
+
+    const delUser = () => {
+        setTimeout(() => {
+            const collectionRef = collection(db, 'users');
+            const dbRef = doc(collectionRef, id);
+            (async () => {
+                await deleteDoc(dbRef).then(() => {
+                    deleteCurrentUser();
+                    dispatch(
+                        showLoadingSlice.actions.showLoading({
+                            state: false,
+                        }),
+                    );
+                    navigate('/');
+                });
+            })();
+        }, 1000);
+        return;
+    };
+
     const handleDelete = async () => {
         dispatch(
             showLoadingSlice.actions.showLoading({
                 state: true,
             }),
         );
-        if (movieData.length !== 0) {
-            new Promise((myResolve, myReject) => {
-                myResolve(); // when successful
-                myReject(); // when error
-            })
-                .then((e) => {
-                    // eslint-disable-next-line array-callback-return
-                    movieData.map((item) => {
-                        const collectionRef = collection(db, 'watch_later_list');
-                        const dbRef = doc(collectionRef, item.id);
-                        (async () => {
-                            const docSnap = await getDoc(dbRef);
-                            const movies = docSnap.data();
-                            let dataUid = movies.uid;
-
-                            if (dataUid.length !== 1) {
-                                const uidIndex = dataUid.findIndex((index) => {
-                                    return index === uid;
-                                });
-                                dataUid.splice(uidIndex, 1);
-                                updateDoc(dbRef, { uid: dataUid });
-                                return;
-                            }
-
-                            await deleteDoc(dbRef).then(() => {});
-                        })();
-                    });
-                    return e;
-                })
-                .then((e) => {
-                    setTimeout(() => {
-                        const collectionRef = collection(db, 'users');
-                        const dbRef = doc(collectionRef, id);
-                        (async () => {
-                            await deleteDoc(dbRef).then(() => {
-                                deleteAccont();
-
-                                dispatch(
-                                    showLoadingSlice.actions.showLoading({
-                                        state: false,
-                                    }),
-                                );
-                                navigate('/');
-                            });
-                        })();
-                    }, 5000);
-                })
-                .catch((error) => {});
-
-            return;
+        if (watchLaterMovies.length !== 0) {
+            delWatchLater();
         }
-        (async () => {
-            const collectionRef = collection(db, 'users');
-            const dbRef = doc(collectionRef, id);
-            await deleteDoc(dbRef).then(() => {
-                deleteAccont();
-                dispatch(
-                    showLoadingSlice.actions.showLoading({
-                        state: false,
-                    }),
-                );
-                navigate('/');
-            });
-        })();
+        if (allCommentsData.length !== 0) {
+            delComments();
+        }
+        delUser();
     };
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -201,7 +215,7 @@ function Profile() {
                                 </Button>
                                 <div>
                                     <Button onClick={handleClickOpen} outline className={cx('delete-btn')}>
-                                        DeleteAccont
+                                        Delete user
                                     </Button>
                                     <Dialog
                                         open={open}

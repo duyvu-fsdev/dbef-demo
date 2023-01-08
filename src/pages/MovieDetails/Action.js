@@ -19,8 +19,8 @@ import {
     TwitterIcon,
     TwitterShareButton,
 } from 'react-share';
-import { MyTooltip } from '_/components/CustomComponents/CustomComponents';
 
+import { MyTooltip } from '_/components/CustomComponents/CustomComponents';
 import { Button } from '_/components/subUI';
 import AddDocumentBtn from '_/components/subUI/AddMovieBtn/AddMovieBtn';
 import LoginBtn from '_/components/subUI/LoginBtn/LoginBtn';
@@ -36,9 +36,7 @@ function Action(props) {
     const dispatch = useDispatch();
     const { uid } = useAuth();
     const [dataDoc, setDataDoc] = useState();
-
     const { data, is18, hasUser } = props;
-
     const handleShowSnackbar = (state) => {
         dispatch(
             showNotifSlice.actions.showNotif({

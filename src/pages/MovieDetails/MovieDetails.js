@@ -17,10 +17,9 @@ const cx = classNames.bind(styles);
 
 function MovieDetails() {
     const dispatch = useDispatch();
-    const { userData } = useFireStore();
-    const [data, setData] = useState({});
-    const [is18, setIs18] = useState(false);
-
+    const { fireStoreData } = useFireStore();
+    const [currentMovieInfo, setCurrentMovieInfo] = useState({ currentMovie: {}, is18: false, hasUser: false });
+    const { currentMovie, is18, hasUser } = currentMovieInfo;
     const {
         slug,
         name,
@@ -37,7 +36,7 @@ function MovieDetails() {
         thumbUrl,
         posterUrl,
         year,
-    } = data;
+    } = currentMovie;
     useEffect(() => {
         const slug = getAllUrlParams().name;
         dispatch(fetchMovies(slug))
@@ -69,7 +68,8 @@ function MovieDetails() {
                 };
 
                 category.map((item) => data.category.push(` ${item.name}`));
-                setData({
+                //setData
+                const currentMovie = {
                     slug,
                     name,
                     episodeTotal,
@@ -85,16 +85,25 @@ function MovieDetails() {
                     actor: actor.toString(),
                     director: director.toString(),
                     content: content.replace(/<strong>|<\/strong>|<p>|<\/p>|\\n|&nbsp;|<br>|\\/g, ' '),
-                });
+                };
+                let is18, hasUser;
+                currentMovie.category === undefined || !currentMovie.category.length
+                    ? (is18 = false)
+                    : currentMovie.category.includes(18)
+                    ? (is18 = true)
+                    : (is18 = false);
+
+                !fireStoreData
+                    ? (hasUser = false)
+                    : fireStoreData.currentUserData
+                    ? (hasUser = true)
+                    : (hasUser = false);
+
+                setCurrentMovieInfo({ currentMovie, is18, hasUser });
             });
 
-        category === undefined || !category.length
-            ? setIs18(false)
-            : category.includes(18)
-            ? setIs18(true)
-            : setIs18(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [userData, category]);
+    }, [fireStoreData, category]);
 
     const positionRef = useRef({
         x: 0,
@@ -165,7 +174,7 @@ function MovieDetails() {
                     >
                         <img className={cx('img')} src={thumbUrl} alt={name} />
                     </Box>
-                    <Action data={data} is18={is18} hasUser={hasUser} />
+                    <Action data={currentMovie} is18={is18} hasUser={hasUser} />
                 </Box>
             </MyTooltip>
         ) : (
@@ -176,7 +185,7 @@ function MovieDetails() {
                 >
                     <img className={cx('img')} src={thumbUrl} alt={name} />
                 </Box>
-                <Action data={data} hasUser={hasUser} />
+                <Action data={currentMovie} hasUser={hasUser} />
             </>
         );
     };
@@ -205,7 +214,7 @@ function MovieDetails() {
                                 }}
                             >
                                 <div className={cx('image-container')}>
-                                    {showAction(is18, Boolean(userData), userData?.birthYear)}
+                                    {showAction(is18, hasUser, fireStoreData?.currentUserData?.birthYear)}
                                 </div>
                             </Box>
                             <Box

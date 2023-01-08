@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 function WatchLater() {
     const { uid } = useAuth();
-    const { movieData } = useFireStore();
+    const { fireStoreData } = useFireStore();
 
     useEffect(() => {
         // setDataDoc();
@@ -20,7 +20,11 @@ function WatchLater() {
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('children-content')}>
-                    {movieData?.length ? <MovieItem content={movieData} isWatchLater={true} /> : <h3>List emty</h3>}
+                    {fireStoreData?.watchLaterMovies?.length ? (
+                        <MovieItem content={fireStoreData.watchLaterMovies} isWatchLater={true} />
+                    ) : (
+                        <h3>List emty</h3>
+                    )}
                 </div>
             </div>
         </div>
