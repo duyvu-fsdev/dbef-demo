@@ -71,10 +71,7 @@ Specify the plugin in your `.babelrc` with the custom root or alias. Here's an e
 ..Edit the `config-overrides.js` file in the root directory
 
     const { override, useBabelRc } = require("customize-cra");
-    module.exports = override(
-
-useBabelRc()
-);
+    module.exports = override(useBabelRc());
 
 ---
 
