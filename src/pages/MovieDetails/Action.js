@@ -90,7 +90,7 @@ function Action(props) {
             opacity: 0.3,
         };
     } else {
-        URL_ENDPOINT = `${process.env.REACT_APP_BASE_URL_ENDPOINT}xem-phim&name=${data.slug}&id=0&ep=1`;
+        URL_ENDPOINT = `${window.location.origin}/xem-phim&name=${data.slug}&id=0&ep=1`;
         url = `/xem-phim&name=${slug}&id=0&ep=1`;
         styles = {
             pointerEvents: 'fill',
