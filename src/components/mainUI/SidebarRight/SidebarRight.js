@@ -22,7 +22,7 @@ function SidebarRight(props) {
             if (!lat || !long) return;
 
             await fetch(
-                `${process.env.REACT_APP_WEATHET_API_URL}/weather?lat=${lat}&lon=${long}&appid=${process.env.REACT_APP_WEATHET_API_KEY}`,
+                `${process.env.REACT_APP_WEATHET_API_URL}/weather?lat=${lat}&lon=${long}&appid=${process.env.REACT_APP_WEATHET_API_KEY}&units=metric&lang=en`,
             )
                 .then((res) => res.json())
                 .then((result) => {
@@ -32,7 +32,7 @@ function SidebarRight(props) {
 
                     setWeatherData({
                         name,
-                        temp: ((main.temp - 32) * 5) / 9,
+                        temp: main.temp,
                         sunrise: new Date(sys.sunrise * 1000).toLocaleTimeString('en-IN'),
                         sunset: new Date(sys.sunset * 1000).toLocaleTimeString('en-IN'),
                         weather: weather[0],
